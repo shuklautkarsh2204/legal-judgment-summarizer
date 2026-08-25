@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from pathlib import Path
-from backend.app.services.text_extraction import extract_text_from_pdf, persist_text
+from backend.app.services.text_extraction import txt_extraction, persist_text
 
 app = FastAPI(
     title = "Indian Legal Judgemenr Summarizer",
@@ -28,7 +28,7 @@ async def upload_file(file: UploadFile = File(...)):
     with open(file_path, "wb") as f:
         f.write(contents)
     
-    text = extract_text_from_pdf(file_path)  ## extract text from pdf  
+    text = txt_extraction(file_path)  ## extract text from pdf  
     text_path = persist_text(text, file_path) ## persist the extracted text to a file.  
     
     return {

@@ -8,7 +8,27 @@ def extract_text_from_pdf(pdf_path: Path) -> str:
         text += page.get_text()
     
     document.close()
-    return text    
+    return text 
+
+def is_txt_enough(text: str) -> bool:
+    if len(text.strip()) >= 100: ## threshold is 100 words.
+        return True   
+    return False
+
+def txt_extraction(pdf_path: Path)->str:
+    try:
+        text = extract_text_from_pdf(pdf_path)
+        
+        if is_txt_enough(text):
+            return text
+        else:
+            raise ValueError("Extracted text is not enough.")
+    except ValueError as e:
+        raise NotImplementedError(
+            "PDF is scanned and OCR is not yet implemented."
+        )    
+        
+    
 
 def persist_text(text: str, pdf_path: Path) -> Path:
     processed_dir = Path("data/processed") ## location of extraced text.
