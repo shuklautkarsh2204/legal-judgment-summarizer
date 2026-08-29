@@ -44,6 +44,42 @@ class PassageBuilder:
         with open(document_path, 'r', encoding='utf-8') as f:
             return f.read()
     
+    def _get_sentence_spans(self, text, sentences):
+        """
+        Compute the exact character spans of each sentence in document order.
+
+        This avoids naive text.find()/rfind() calls, which fail when the same sentence
+        text appears multiple times in the document. We move forward through the
+        original text in order, using the previous sentence end as the search start.
+        """
+        spans = []
+        search_start = 0
+
+        for sentence in sentences:
+            sentence_text = sentence.strip()
+            if not sentence_text:
+                continue
+
+            start_char = text.find(sentence_text, search_start)
+            if start_char == -1:
+                # Conservative fallback: search the rest of the document from the
+                # earliest remaining location if the sentence was not found after the
+                # previous offset. This preserves order while keeping the mapping
+                # consistent with the text as it appears in the document.
+                start_char = text.find(sentence_text)
+                if start_char == -1:
+                    raise ValueError(f"Sentence text not found in original document: {sentence_text[:80]!r}")
+
+            end_char = start_char + len(sentence_text)
+            spans.append({
+                'text': sentence_text,
+                'start_char': start_char,
+                'end_char': end_char
+            })
+            search_start = end_char
+
+        return spans
+
     def build_passages(self, text, document_id=None):
         """
         Build structured passages from document text.
@@ -77,29 +113,22 @@ class PassageBuilder:
         
         if not sentences:
             return []
-        
+
+        sentence_spans = self._get_sentence_spans(text, sentences)
         passages = []
         passage_id = 0
         
         # Group sentences into passages
-        for i in range(0, len(sentences), self.sentences_per_passage):
-            sentence_batch = sentences[i:i + self.sentences_per_passage]
+        for i in range(0, len(sentence_spans), self.sentences_per_passage):
+            sentence_batch = sentence_spans[i:i + self.sentences_per_passage]
             sentence_start_idx = i
             sentence_end_idx = i + len(sentence_batch) - 1
             
-            # Join sentences to form passage text
-            passage_text = " ".join(sentence_batch)
-            
-            # Find position in original text
-            start_char = text.find(sentence_batch[0])
-            end_char = start_char
-            
-            # Compute accurate end position by finding the last sentence
-            last_sentence = sentence_batch[-1]
-            last_idx = text.rfind(last_sentence)
-            if last_idx != -1:
-                end_char = last_idx + len(last_sentence)
-            
+            # Join sentences to form passage text while preserving document order.
+            passage_text = " ".join(span['text'] for span in sentence_batch)
+
+            first_span = sentence_batch[0]
+            last_span = sentence_batch[-1]
             passage = {
                 'document_id': doc_id,
                 'passage_id': passage_id,
@@ -108,8 +137,8 @@ class PassageBuilder:
                 'num_sentences': len(sentence_batch),
                 'text': passage_text,
                 'original_position': {
-                    'start_char': start_char if start_char != -1 else 0,
-                    'end_char': end_char
+                    'start_char': first_span['start_char'],
+                    'end_char': last_span['end_char']
                 }
             }
             
