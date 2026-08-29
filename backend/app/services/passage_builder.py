@@ -66,9 +66,10 @@ class PassageBuilder:
                 # earliest remaining location if the sentence was not found after the
                 # previous offset. This preserves order while keeping the mapping
                 # consistent with the text as it appears in the document.
-                start_char = text.find(sentence_text)
-                if start_char == -1:
-                    raise ValueError(f"Sentence text not found in original document: {sentence_text[:80]!r}")
+                raise ValueError(
+                    f"Sentence text not found after character position "
+                    f"{search_start}: {sentence_text[:80]!r}"
+                )
 
             end_char = start_char + len(sentence_text)
             spans.append({
@@ -266,3 +267,26 @@ class PassageBuilder:
             'num_passages': len(passages),
             'issues': issues
         }
+    
+    def test_repeated_sentences_have_correct_positions():
+    text = (
+        "The appellant filed an appeal. "
+        "The Court considered the matter. "
+        "The appellant filed an appeal."
+    )
+
+    builder = PassageBuilder(
+        sentences_per_passage=1,
+        document_id="repeated_test"
+    )
+
+    passages = builder.build_passages(text)
+
+    assert len(passages) == 3
+
+    assert passages[0]["original_position"]["start_char"] == 0
+
+    assert (
+        passages[2]["original_position"]["start_char"]
+        > passages[0]["original_position"]["start_char"]
+    )    
