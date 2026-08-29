@@ -268,7 +268,8 @@ class PassageBuilder:
             'issues': issues
         }
     
-    def test_repeated_sentences_have_correct_positions():
+def test_repeated_sentences_have_correct_positions():
+    """Test that repeated sentences get correct original positions."""
     text = (
         "The appellant filed an appeal. "
         "The Court considered the matter. "

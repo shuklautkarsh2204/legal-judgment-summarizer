@@ -13,9 +13,13 @@ Process:
 
 import json
 import time
-from pathlib import Path
-from backend.app.services.passage_builder import PassageBuilder
 import sys
+from pathlib import Path
+
+# Add project root to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+from backend.app.services.passage_builder import PassageBuilder
 
 
 def create_sample_judgment():
@@ -301,10 +305,16 @@ def save_results(experiment_results, output_dir="data/experiments"):
 
 
 if __name__ == "__main__":
-    # Run experiment with sample data
-    results = run_experiment()
-    
-    # Save results
+    pdf_text_path = Path("data/processed/Vijay_Madanlal_Choudhary_vs_Union_Of_India_on_27_July_2022.txt")
+
+    with open(pdf_text_path, "r", encoding="utf-8") as file:
+        judgment_text = file.read()
+
+    results = run_experiment(
+        judgment_text=judgment_text,
+        document_id=pdf_text_path.stem
+    )
+
     save_results(results)
     
     print("\n" + "=" * 70)

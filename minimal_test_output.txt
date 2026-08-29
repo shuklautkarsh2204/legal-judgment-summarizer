@@ -1,0 +1,29 @@
+TEST 1: Import PassageBuilder
+[OK] PassageBuilder imported
+
+TEST 2: Create PassageBuilder instance
+[OK] PassageBuilder instance created
+
+TEST 3: Build passages from small text
+[OK] Built 4 passages
+
+TEST 4: Check passage structure
+First passage structure:
+  - passage_id: 0
+  - num_sentences: 3
+  - text length: 48
+  - original_position: {'start_char': 0, 'end_char': 48}
+[OK] Passage structure is valid
+
+TEST 5: Encode passages (this will download model on first run)
+[OK] Encoded 4 passages
+  - Embedding dimension: 384
+  - Processing time: 0.1468s
+
+TEST 6: Verify embeddings
+[OK] Embeddings present
+  - First passage embedding shape: (384,)
+
+======================================================================
+ALL TESTS PASSED
+======================================================================
