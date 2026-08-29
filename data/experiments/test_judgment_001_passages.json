@@ -1,0 +1,2282 @@
+[
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 0,
+    "sentence_start": 0,
+    "sentence_end": 4,
+    "num_sentences": 5,
+    "text": "JUDGMENT\n\n1. This appeal is filed by the appellant challenging the order dated 15th March 2023 passed by the High Court. 2. The appellant contended that the said order violates the fundamental rights guaranteed under Article 21 of the Constitution. 3.",
+    "original_position": {
+      "start_char": 0,
+      "end_char": 38258
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 1,
+    "sentence_start": 5,
+    "sentence_end": 9,
+    "num_sentences": 5,
+    "text": "On behalf of the respondent, it was submitted that the impugned order is well-reasoned and supported by precedent. FACTS\n\n4. The relevant facts are as follows: The petitioner filed a writ petition challenging the validity of Section 45 of the Act. 5. It was contended that Section 45 is unconstitutional and violates the right to equality under Article 14.",
+    "original_position": {
+      "start_char": 252,
+      "end_char": 35272
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 2,
+    "sentence_start": 10,
+    "sentence_end": 14,
+    "num_sentences": 5,
+    "text": "6. The respondent opposed the petition on the ground that Section 45 has been consistently upheld by various courts. 7. A full bench of the High Court has previously held that Section 45 is constitutionally valid. 8.",
+    "original_position": {
+      "start_char": 610,
+      "end_char": 38697
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 3,
+    "sentence_start": 15,
+    "sentence_end": 19,
+    "num_sentences": 5,
+    "text": "The impugned order dated 15th March 2023 relied upon this previous decision. LEGAL ARGUMENTS\n\n9. The appellant submits that times have changed and the previous interpretation should be reconsidered. 10. It is argued that there are at least three landmark judgments from the Supreme Court that support the appellant's position.",
+    "original_position": {
+      "start_char": 827,
+      "end_char": 35826
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 4,
+    "sentence_start": 20,
+    "sentence_end": 24,
+    "num_sentences": 5,
+    "text": "11. The first precedent cited is ABC v. XYZ where the Supreme Court held that procedural safeguards are essential. 12. The second precedent is DEF v. GHI which established that discrimination based on gender is unconstitutional. 13.",
+    "original_position": {
+      "start_char": 1155,
+      "end_char": 36062
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 5,
+    "sentence_start": 25,
+    "sentence_end": 29,
+    "num_sentences": 5,
+    "text": "The third precedent is JKL v. MNO which clarified that the burden of proof lies on the State. COURT'S ANALYSIS\n\n14. We have carefully considered the submissions of both parties and the extensive legal precedents cited. 15. Upon examination, we find that the law as stated in ABC v. XYZ is indeed relevant to the present case.",
+    "original_position": {
+      "start_char": 1388,
+      "end_char": 36391
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 6,
+    "sentence_start": 30,
+    "sentence_end": 34,
+    "num_sentences": 5,
+    "text": "16. The reasoning in that judgment directly applies because both cases involve the interpretation of procedural rights. 17. However, the respondent's reliance on earlier precedents is also not entirely misplaced. 18.",
+    "original_position": {
+      "start_char": 1715,
+      "end_char": 36611
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 7,
+    "sentence_start": 35,
+    "sentence_end": 39,
+    "num_sentences": 5,
+    "text": "Those decisions did establish a general principle about the interpretation of such statutes. 19. We note that while those decisions are instructive, they do not directly address the facts presented here. RESOLUTION OF CONTENTIONS\n\n20. Coming back to the contention raised in paragraph 9 above, we must evaluate whether times have indeed changed.",
+    "original_position": {
+      "start_char": 1932,
+      "end_char": 36960
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 8,
+    "sentence_start": 40,
+    "sentence_end": 44,
+    "num_sentences": 5,
+    "text": "21. The argument that the previous interpretation should be reconsidered merits careful consideration. 22. We find that the arguments regarding constitutional validity raised in paragraph 5 require a nuanced analysis. 23.",
+    "original_position": {
+      "start_char": 2279,
+      "end_char": 37185
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 9,
+    "sentence_start": 45,
+    "sentence_end": 49,
+    "num_sentences": 5,
+    "text": "The unconstitutionality argument raised against Section 45 cannot be summarily dismissed. 24. However, it also cannot be entirely accepted without examining the legislative purpose of Section 45. 25. The purpose of Section 45 as stated in the legislative history is to ensure administrative efficiency.",
+    "original_position": {
+      "start_char": 2501,
+      "end_char": 37490
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 10,
+    "sentence_start": 50,
+    "sentence_end": 54,
+    "num_sentences": 5,
+    "text": "26. This administrative purpose may justify some restrictions that would otherwise appear discriminatory. PRECEDENT ANALYSIS\n\n27. Regarding the precedent cited in paragraph 11, ABC v. XYZ held that procedural safeguards cannot be bypassed. 28.",
+    "original_position": {
+      "start_char": 2804,
+      "end_char": 37738
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 11,
+    "sentence_start": 55,
+    "sentence_end": 59,
+    "num_sentences": 5,
+    "text": "We find this principle applicable because Section 45 does indeed bypass certain procedural safeguards. 29. The High Court's order dismissing the writ petition failed to adequately address this point. 30. Regarding the precedent cited in paragraph 12, DEF v. GHI established that all discrimination requires scrutiny.",
+    "original_position": {
+      "start_char": 3049,
+      "end_char": 38057
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 12,
+    "sentence_start": 60,
+    "sentence_end": 64,
+    "num_sentences": 5,
+    "text": "31. However, the High Court's order did attempt to distinguish DEF v. GHI on its facts. 32. We find the High Court's distinction to be somewhat weak but not entirely unmeritorious. CONCLUSION\n\n33.",
+    "original_position": {
+      "start_char": 3366,
+      "end_char": 3563
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 13,
+    "sentence_start": 65,
+    "sentence_end": 69,
+    "num_sentences": 5,
+    "text": "For the reasons stated above, we partially allow the appeal. 34. We set aside the High Court's order to the extent it upheld Section 45 without adequate justification. 35. We remit the matter to the High Court for reconsideration in light of this judgment.",
+    "original_position": {
+      "start_char": 3564,
+      "end_char": 38517
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 14,
+    "sentence_start": 70,
+    "sentence_end": 74,
+    "num_sentences": 5,
+    "text": "36. The High Court shall specifically address the applicability of ABC v. XYZ to the present facts. 37. The matter is accordingly remitted with these observations. ORDERS\n\n38.",
+    "original_position": {
+      "start_char": 3821,
+      "end_char": 3997
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 15,
+    "sentence_start": 75,
+    "sentence_end": 79,
+    "num_sentences": 5,
+    "text": "The appeal is partially allowed as indicated above. 39. The order of the High Court is set aside to the extent indicated. 40. The matter is remitted to the High Court for reconsideration within 6 months.",
+    "original_position": {
+      "start_char": 3998,
+      "end_char": 38903
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 16,
+    "sentence_start": 80,
+    "sentence_end": 84,
+    "num_sentences": 5,
+    "text": "41. There shall be no order as to costs. 42. The appeal is disposed of accordingly. JUDGMENT\n\n101.",
+    "original_position": {
+      "start_char": 4202,
+      "end_char": 4301
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 17,
+    "sentence_start": 85,
+    "sentence_end": 89,
+    "num_sentences": 5,
+    "text": "This appeal is filed by the appellant challenging the order dated 15th March 2023 passed by the High Court. 102. The appellant contended that the said order violates the fundamental rights guaranteed under Article 21 of the Constitution. 103. On behalf of the respondent, it was submitted that the impugned order is well-reasoned and supported by precedent.",
+    "original_position": {
+      "start_char": 13,
+      "end_char": 35025
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 18,
+    "sentence_start": 90,
+    "sentence_end": 94,
+    "num_sentences": 5,
+    "text": "FACTS\n\n104. The relevant facts are as follows: The petitioner filed a writ petition challenging the validity of Section 45 of the Act. 105. It was contended that Section 45 is unconstitutional and violates the right to equality under Article 14. 106.",
+    "original_position": {
+      "start_char": 4661,
+      "end_char": 4911
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 19,
+    "sentence_start": 95,
+    "sentence_end": 99,
+    "num_sentences": 5,
+    "text": "The respondent opposed the petition on the ground that Section 45 has been consistently upheld by various courts. 107. A full bench of the High Court has previously held that Section 45 is constitutionally valid. 108. The impugned order dated 15th March 2023 relied upon this previous decision.",
+    "original_position": {
+      "start_char": 613,
+      "end_char": 35572
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 20,
+    "sentence_start": 100,
+    "sentence_end": 104,
+    "num_sentences": 5,
+    "text": "LEGAL ARGUMENTS\n\n109. The appellant submits that times have changed and the previous interpretation should be reconsidered. 110. It is argued that there are at least three landmark judgments from the Supreme Court that support the appellant's position. 111.",
+    "original_position": {
+      "start_char": 5208,
+      "end_char": 5465
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 21,
+    "sentence_start": 105,
+    "sentence_end": 109,
+    "num_sentences": 5,
+    "text": "The first precedent cited is ABC v. XYZ where the Supreme Court held that procedural safeguards are essential. 112. The second precedent is DEF v. GHI which established that discrimination based on gender is unconstitutional. 113. The third precedent is JKL v. MNO which clarified that the burden of proof lies on the State.",
+    "original_position": {
+      "start_char": 1159,
+      "end_char": 36156
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 22,
+    "sentence_start": 110,
+    "sentence_end": 114,
+    "num_sentences": 5,
+    "text": "COURT'S ANALYSIS\n\n114. We have carefully considered the submissions of both parties and the extensive legal precedents cited. 115. Upon examination, we find that the law as stated in ABC v. XYZ is indeed relevant to the present case. 116.",
+    "original_position": {
+      "start_char": 5792,
+      "end_char": 6030
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 23,
+    "sentence_start": 115,
+    "sentence_end": 119,
+    "num_sentences": 5,
+    "text": "The reasoning in that judgment directly applies because both cases involve the interpretation of procedural rights. 117. However, the respondent's reliance on earlier precedents is also not entirely misplaced. 118. Those decisions did establish a general principle about the interpretation of such statutes.",
+    "original_position": {
+      "start_char": 1719,
+      "end_char": 36704
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 24,
+    "sentence_start": 120,
+    "sentence_end": 124,
+    "num_sentences": 5,
+    "text": "119. We note that while those decisions are instructive, they do not directly address the facts presented here. RESOLUTION OF CONTENTIONS\n\n120. Coming back to the contention raised in paragraph 9 above, we must evaluate whether times have indeed changed. 121.",
+    "original_position": {
+      "start_char": 6339,
+      "end_char": 6599
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 25,
+    "sentence_start": 125,
+    "sentence_end": 129,
+    "num_sentences": 5,
+    "text": "The argument that the previous interpretation should be reconsidered merits careful consideration. 122. We find that the arguments regarding constitutional validity raised in paragraph 5 require a nuanced analysis. 123. The unconstitutionality argument raised against Section 45 cannot be summarily dismissed.",
+    "original_position": {
+      "start_char": 2283,
+      "end_char": 37275
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 26,
+    "sentence_start": 130,
+    "sentence_end": 134,
+    "num_sentences": 5,
+    "text": "124. However, it also cannot be entirely accepted without examining the legislative purpose of Section 45. 125. The purpose of Section 45 as stated in the legislative history is to ensure administrative efficiency. 126.",
+    "original_position": {
+      "start_char": 6910,
+      "end_char": 7129
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 27,
+    "sentence_start": 135,
+    "sentence_end": 139,
+    "num_sentences": 5,
+    "text": "This administrative purpose may justify some restrictions that would otherwise appear discriminatory. PRECEDENT ANALYSIS\n\n127. Regarding the precedent cited in paragraph 11, ABC v. XYZ held that procedural safeguards cannot be bypassed. 128. We find this principle applicable because Section 45 does indeed bypass certain procedural safeguards.",
+    "original_position": {
+      "start_char": 2808,
+      "end_char": 37841
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 28,
+    "sentence_start": 140,
+    "sentence_end": 144,
+    "num_sentences": 5,
+    "text": "129. The High Court's order dismissing the writ petition failed to adequately address this point. 130. Regarding the precedent cited in paragraph 12, DEF v. GHI established that all discrimination requires scrutiny. 131.",
+    "original_position": {
+      "start_char": 7476,
+      "end_char": 7696
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 29,
+    "sentence_start": 145,
+    "sentence_end": 149,
+    "num_sentences": 5,
+    "text": "However, the High Court's order did attempt to distinguish DEF v. GHI on its facts. 132. We find the High Court's distinction to be somewhat weak but not entirely unmeritorious. CONCLUSION\n\n133. For the reasons stated above, we partially allow the appeal.",
+    "original_position": {
+      "start_char": 3370,
+      "end_char": 38319
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 30,
+    "sentence_start": 150,
+    "sentence_end": 154,
+    "num_sentences": 5,
+    "text": "134. We set aside the High Court's order to the extent it upheld Section 45 without adequate justification. 135. We remit the matter to the High Court for reconsideration in light of this judgment. 136.",
+    "original_position": {
+      "start_char": 7954,
+      "end_char": 8156
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 31,
+    "sentence_start": 155,
+    "sentence_end": 159,
+    "num_sentences": 5,
+    "text": "The High Court shall specifically address the applicability of ABC v. XYZ to the present facts. 137. The matter is accordingly remitted with these observations. ORDERS\n\n138. The appeal is partially allowed as indicated above.",
+    "original_position": {
+      "start_char": 3825,
+      "end_char": 38749
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 32,
+    "sentence_start": 160,
+    "sentence_end": 164,
+    "num_sentences": 5,
+    "text": "139. The order of the High Court is set aside to the extent indicated. 140. The matter is remitted to the High Court for reconsideration within 6 months. 141.",
+    "original_position": {
+      "start_char": 8384,
+      "end_char": 8542
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 33,
+    "sentence_start": 165,
+    "sentence_end": 169,
+    "num_sentences": 5,
+    "text": "There shall be no order as to costs. 142. The appeal is disposed of accordingly. JUDGMENT\n\n201. This appeal is filed by the appellant challenging the order dated 15th March 2023 passed by the High Court.",
+    "original_position": {
+      "start_char": 4206,
+      "end_char": 34775
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 34,
+    "sentence_start": 170,
+    "sentence_end": 174,
+    "num_sentences": 5,
+    "text": "202. The appellant contended that the said order violates the fundamental rights guaranteed under Article 21 of the Constitution. 203. On behalf of the respondent, it was submitted that the impugned order is well-reasoned and supported by precedent. FACTS\n\n204.",
+    "original_position": {
+      "start_char": 8748,
+      "end_char": 9010
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 35,
+    "sentence_start": 175,
+    "sentence_end": 179,
+    "num_sentences": 5,
+    "text": "The relevant facts are as follows: The petitioner filed a writ petition challenging the validity of Section 45 of the Act. 205. It was contended that Section 45 is unconstitutional and violates the right to equality under Article 14. 206. The respondent opposed the petition on the ground that Section 45 has been consistently upheld by various courts.",
+    "original_position": {
+      "start_char": 378,
+      "end_char": 35391
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 36,
+    "sentence_start": 180,
+    "sentence_end": 184,
+    "num_sentences": 5,
+    "text": "207. A full bench of the High Court has previously held that Section 45 is constitutionally valid. 208. The impugned order dated 15th March 2023 relied upon this previous decision. LEGAL ARGUMENTS\n\n209.",
+    "original_position": {
+      "start_char": 9364,
+      "end_char": 9567
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 37,
+    "sentence_start": 185,
+    "sentence_end": 189,
+    "num_sentences": 5,
+    "text": "The appellant submits that times have changed and the previous interpretation should be reconsidered. 210. It is argued that there are at least three landmark judgments from the Supreme Court that support the appellant's position. 211. The first precedent cited is ABC v. XYZ where the Supreme Court held that procedural safeguards are essential.",
+    "original_position": {
+      "start_char": 925,
+      "end_char": 35942
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 38,
+    "sentence_start": 190,
+    "sentence_end": 194,
+    "num_sentences": 5,
+    "text": "212. The second precedent is DEF v. GHI which established that discrimination based on gender is unconstitutional. 213. The third precedent is JKL v. MNO which clarified that the burden of proof lies on the State. COURT'S ANALYSIS\n\n214.",
+    "original_position": {
+      "start_char": 9915,
+      "end_char": 10152
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 39,
+    "sentence_start": 195,
+    "sentence_end": 199,
+    "num_sentences": 5,
+    "text": "We have carefully considered the submissions of both parties and the extensive legal precedents cited. 215. Upon examination, we find that the law as stated in ABC v. XYZ is indeed relevant to the present case. 216. The reasoning in that judgment directly applies because both cases involve the interpretation of procedural rights.",
+    "original_position": {
+      "start_char": 1505,
+      "end_char": 36512
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 40,
+    "sentence_start": 200,
+    "sentence_end": 204,
+    "num_sentences": 5,
+    "text": "217. However, the respondent's reliance on earlier precedents is also not entirely misplaced. 218. Those decisions did establish a general principle about the interpretation of such statutes. 219.",
+    "original_position": {
+      "start_char": 10485,
+      "end_char": 10681
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 41,
+    "sentence_start": 205,
+    "sentence_end": 209,
+    "num_sentences": 5,
+    "text": "We note that while those decisions are instructive, they do not directly address the facts presented here. RESOLUTION OF CONTENTIONS\n\n220. Coming back to the contention raised in paragraph 9 above, we must evaluate whether times have indeed changed. 221. The argument that the previous interpretation should be reconsidered merits careful consideration.",
+    "original_position": {
+      "start_char": 2029,
+      "end_char": 37064
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 42,
+    "sentence_start": 210,
+    "sentence_end": 214,
+    "num_sentences": 5,
+    "text": "222. We find that the arguments regarding constitutional validity raised in paragraph 5 require a nuanced analysis. 223. The unconstitutionality argument raised against Section 45 cannot be summarily dismissed. 224.",
+    "original_position": {
+      "start_char": 11037,
+      "end_char": 11252
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 43,
+    "sentence_start": 215,
+    "sentence_end": 219,
+    "num_sentences": 5,
+    "text": "However, it also cannot be entirely accepted without examining the legislative purpose of Section 45. 225. The purpose of Section 45 as stated in the legislative history is to ensure administrative efficiency. 226. This administrative purpose may justify some restrictions that would otherwise appear discriminatory.",
+    "original_position": {
+      "start_char": 2595,
+      "end_char": 37597
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 44,
+    "sentence_start": 220,
+    "sentence_end": 224,
+    "num_sentences": 5,
+    "text": "PRECEDENT ANALYSIS\n\n227. Regarding the precedent cited in paragraph 11, ABC v. XYZ held that procedural safeguards cannot be bypassed. 228. We find this principle applicable because Section 45 does indeed bypass certain procedural safeguards. 229.",
+    "original_position": {
+      "start_char": 11571,
+      "end_char": 11818
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 45,
+    "sentence_start": 225,
+    "sentence_end": 229,
+    "num_sentences": 5,
+    "text": "The High Court's order dismissing the writ petition failed to adequately address this point. 230. Regarding the precedent cited in paragraph 12, DEF v. GHI established that all discrimination requires scrutiny. 231. However, the High Court's order did attempt to distinguish DEF v. GHI on its facts.",
+    "original_position": {
+      "start_char": 3156,
+      "end_char": 38146
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 46,
+    "sentence_start": 230,
+    "sentence_end": 234,
+    "num_sentences": 5,
+    "text": "232. We find the High Court's distinction to be somewhat weak but not entirely unmeritorious. CONCLUSION\n\n233. For the reasons stated above, we partially allow the appeal. 234.",
+    "original_position": {
+      "start_char": 12119,
+      "end_char": 12296
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 47,
+    "sentence_start": 235,
+    "sentence_end": 239,
+    "num_sentences": 5,
+    "text": "We set aside the High Court's order to the extent it upheld Section 45 without adequate justification. 235. We remit the matter to the High Court for reconsideration in light of this judgment. 236. The High Court shall specifically address the applicability of ABC v. XYZ to the present facts.",
+    "original_position": {
+      "start_char": 3629,
+      "end_char": 38618
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 48,
+    "sentence_start": 240,
+    "sentence_end": 244,
+    "num_sentences": 5,
+    "text": "237. The matter is accordingly remitted with these observations. ORDERS\n\n238. The appeal is partially allowed as indicated above. 239.",
+    "original_position": {
+      "start_char": 12591,
+      "end_char": 12726
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 49,
+    "sentence_start": 245,
+    "sentence_end": 249,
+    "num_sentences": 5,
+    "text": "The order of the High Court is set aside to the extent indicated. 240. The matter is remitted to the High Court for reconsideration within 6 months. 241. There shall be no order as to costs.",
+    "original_position": {
+      "start_char": 4054,
+      "end_char": 38945
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 50,
+    "sentence_start": 250,
+    "sentence_end": 254,
+    "num_sentences": 5,
+    "text": "242. The appeal is disposed of accordingly. JUDGMENT\n\n301. This appeal is filed by the appellant challenging the order dated 15th March 2023 passed by the High Court. 302.",
+    "original_position": {
+      "start_char": 12918,
+      "end_char": 13090
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 51,
+    "sentence_start": 255,
+    "sentence_end": 259,
+    "num_sentences": 5,
+    "text": "The appellant contended that the said order violates the fundamental rights guaranteed under Article 21 of the Constitution. 303. On behalf of the respondent, it was submitted that the impugned order is well-reasoned and supported by precedent. FACTS\n\n304. The relevant facts are as follows: The petitioner filed a writ petition challenging the validity of Section 45 of the Act.",
+    "original_position": {
+      "start_char": 124,
+      "end_char": 35161
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 52,
+    "sentence_start": 260,
+    "sentence_end": 264,
+    "num_sentences": 5,
+    "text": "305. It was contended that Section 45 is unconstitutional and violates the right to equality under Article 14. 306. The respondent opposed the petition on the ground that Section 45 has been consistently upheld by various courts. 307.",
+    "original_position": {
+      "start_char": 13472,
+      "end_char": 13706
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 53,
+    "sentence_start": 265,
+    "sentence_end": 269,
+    "num_sentences": 5,
+    "text": "A full bench of the High Court has previously held that Section 45 is constitutionally valid. 308. The impugned order dated 15th March 2023 relied upon this previous decision. LEGAL ARGUMENTS\n\n309. The appellant submits that times have changed and the previous interpretation should be reconsidered.",
+    "original_position": {
+      "start_char": 730,
+      "end_char": 35697
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 54,
+    "sentence_start": 270,
+    "sentence_end": 274,
+    "num_sentences": 5,
+    "text": "310. It is argued that there are at least three landmark judgments from the Supreme Court that support the appellant's position. 311. The first precedent cited is ABC v. XYZ where the Supreme Court held that procedural safeguards are essential. 312.",
+    "original_position": {
+      "start_char": 14008,
+      "end_char": 14257
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 55,
+    "sentence_start": 275,
+    "sentence_end": 279,
+    "num_sentences": 5,
+    "text": "The second precedent is DEF v. GHI which established that discrimination based on gender is unconstitutional. 313. The third precedent is JKL v. MNO which clarified that the burden of proof lies on the State. COURT'S ANALYSIS\n\n314. We have carefully considered the submissions of both parties and the extensive legal precedents cited.",
+    "original_position": {
+      "start_char": 1274,
+      "end_char": 36283
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 56,
+    "sentence_start": 280,
+    "sentence_end": 284,
+    "num_sentences": 5,
+    "text": "315. Upon examination, we find that the law as stated in ABC v. XYZ is indeed relevant to the present case. 316. The reasoning in that judgment directly applies because both cases involve the interpretation of procedural rights. 317.",
+    "original_position": {
+      "start_char": 14594,
+      "end_char": 14827
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 57,
+    "sentence_start": 285,
+    "sentence_end": 289,
+    "num_sentences": 5,
+    "text": "However, the respondent's reliance on earlier precedents is also not entirely misplaced. 318. Those decisions did establish a general principle about the interpretation of such statutes. 319. We note that while those decisions are instructive, they do not directly address the facts presented here.",
+    "original_position": {
+      "start_char": 1839,
+      "end_char": 36816
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 58,
+    "sentence_start": 290,
+    "sentence_end": 294,
+    "num_sentences": 5,
+    "text": "RESOLUTION OF CONTENTIONS\n\n320. Coming back to the contention raised in paragraph 9 above, we must evaluate whether times have indeed changed. 321. The argument that the previous interpretation should be reconsidered merits careful consideration. 322.",
+    "original_position": {
+      "start_char": 15128,
+      "end_char": 15379
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 59,
+    "sentence_start": 295,
+    "sentence_end": 299,
+    "num_sentences": 5,
+    "text": "We find that the arguments regarding constitutional validity raised in paragraph 5 require a nuanced analysis. 323. The unconstitutionality argument raised against Section 45 cannot be summarily dismissed. 324. However, it also cannot be entirely accepted without examining the legislative purpose of Section 45.",
+    "original_position": {
+      "start_char": 2386,
+      "end_char": 37382
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 60,
+    "sentence_start": 300,
+    "sentence_end": 304,
+    "num_sentences": 5,
+    "text": "325. The purpose of Section 45 as stated in the legislative history is to ensure administrative efficiency. 326. This administrative purpose may justify some restrictions that would otherwise appear discriminatory. PRECEDENT ANALYSIS\n\n327.",
+    "original_position": {
+      "start_char": 15693,
+      "end_char": 15933
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 61,
+    "sentence_start": 305,
+    "sentence_end": 309,
+    "num_sentences": 5,
+    "text": "Regarding the precedent cited in paragraph 11, ABC v. XYZ held that procedural safeguards cannot be bypassed. 328. We find this principle applicable because Section 45 does indeed bypass certain procedural safeguards. 329. The High Court's order dismissing the writ petition failed to adequately address this point.",
+    "original_position": {
+      "start_char": 2935,
+      "end_char": 37939
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 62,
+    "sentence_start": 310,
+    "sentence_end": 314,
+    "num_sentences": 5,
+    "text": "330. Regarding the precedent cited in paragraph 12, DEF v. GHI established that all discrimination requires scrutiny. 331. However, the High Court's order did attempt to distinguish DEF v. GHI on its facts. 332.",
+    "original_position": {
+      "start_char": 16250,
+      "end_char": 16461
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 63,
+    "sentence_start": 315,
+    "sentence_end": 319,
+    "num_sentences": 5,
+    "text": "We find the High Court's distinction to be somewhat weak but not entirely unmeritorious. CONCLUSION\n\n333. For the reasons stated above, we partially allow the appeal. 334. We set aside the High Court's order to the extent it upheld Section 45 without adequate justification.",
+    "original_position": {
+      "start_char": 3458,
+      "end_char": 38427
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 64,
+    "sentence_start": 320,
+    "sentence_end": 324,
+    "num_sentences": 5,
+    "text": "335. We remit the matter to the High Court for reconsideration in light of this judgment. 336. The High Court shall specifically address the applicability of ABC v. XYZ to the present facts. 337.",
+    "original_position": {
+      "start_char": 16738,
+      "end_char": 16933
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 65,
+    "sentence_start": 325,
+    "sentence_end": 329,
+    "num_sentences": 5,
+    "text": "The matter is accordingly remitted with these observations. ORDERS\n\n338. The appeal is partially allowed as indicated above. 339. The order of the High Court is set aside to the extent indicated.",
+    "original_position": {
+      "start_char": 3925,
+      "end_char": 38820
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 66,
+    "sentence_start": 330,
+    "sentence_end": 334,
+    "num_sentences": 5,
+    "text": "340. The matter is remitted to the High Court for reconsideration within 6 months. 341. There shall be no order as to costs. 342.",
+    "original_position": {
+      "start_char": 17131,
+      "end_char": 17260
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 67,
+    "sentence_start": 335,
+    "sentence_end": 339,
+    "num_sentences": 5,
+    "text": "The appeal is disposed of accordingly. JUDGMENT\n\n401. This appeal is filed by the appellant challenging the order dated 15th March 2023 passed by the High Court. 402. The appellant contended that the said order violates the fundamental rights guaranteed under Article 21 of the Constitution.",
+    "original_position": {
+      "start_char": 4247,
+      "end_char": 34905
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 68,
+    "sentence_start": 340,
+    "sentence_end": 344,
+    "num_sentences": 5,
+    "text": "403. On behalf of the respondent, it was submitted that the impugned order is well-reasoned and supported by precedent. FACTS\n\n404. The relevant facts are as follows: The petitioner filed a writ petition challenging the validity of Section 45 of the Act. 405.",
+    "original_position": {
+      "start_char": 17554,
+      "end_char": 17814
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 69,
+    "sentence_start": 345,
+    "sentence_end": 349,
+    "num_sentences": 5,
+    "text": "It was contended that Section 45 is unconstitutional and violates the right to equality under Article 14. 406. The respondent opposed the petition on the ground that Section 45 has been consistently upheld by various courts. 407. A full bench of the High Court has previously held that Section 45 is constitutionally valid.",
+    "original_position": {
+      "start_char": 504,
+      "end_char": 35490
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 70,
+    "sentence_start": 350,
+    "sentence_end": 354,
+    "num_sentences": 5,
+    "text": "408. The impugned order dated 15th March 2023 relied upon this previous decision. LEGAL ARGUMENTS\n\n409. The appellant submits that times have changed and the previous interpretation should be reconsidered. 410.",
+    "original_position": {
+      "start_char": 18139,
+      "end_char": 18350
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 71,
+    "sentence_start": 355,
+    "sentence_end": 359,
+    "num_sentences": 5,
+    "text": "It is argued that there are at least three landmark judgments from the Supreme Court that support the appellant's position. 411. The first precedent cited is ABC v. XYZ where the Supreme Court held that procedural safeguards are essential. 412. The second precedent is DEF v. GHI which established that discrimination based on gender is unconstitutional.",
+    "original_position": {
+      "start_char": 1031,
+      "end_char": 36057
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 72,
+    "sentence_start": 360,
+    "sentence_end": 364,
+    "num_sentences": 5,
+    "text": "413. The third precedent is JKL v. MNO which clarified that the burden of proof lies on the State. COURT'S ANALYSIS\n\n414. We have carefully considered the submissions of both parties and the extensive legal precedents cited. 415.",
+    "original_position": {
+      "start_char": 18706,
+      "end_char": 18936
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 73,
+    "sentence_start": 365,
+    "sentence_end": 369,
+    "num_sentences": 5,
+    "text": "Upon examination, we find that the law as stated in ABC v. XYZ is indeed relevant to the present case. 416. The reasoning in that judgment directly applies because both cases involve the interpretation of procedural rights. 417. However, the respondent's reliance on earlier precedents is also not entirely misplaced.",
+    "original_position": {
+      "start_char": 1612,
+      "end_char": 36606
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 74,
+    "sentence_start": 370,
+    "sentence_end": 374,
+    "num_sentences": 5,
+    "text": "418. Those decisions did establish a general principle about the interpretation of such statutes. 419. We note that while those decisions are instructive, they do not directly address the facts presented here. RESOLUTION OF CONTENTIONS\n\n420.",
+    "original_position": {
+      "start_char": 19255,
+      "end_char": 19497
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 75,
+    "sentence_start": 375,
+    "sentence_end": 379,
+    "num_sentences": 5,
+    "text": "Coming back to the contention raised in paragraph 9 above, we must evaluate whether times have indeed changed. 421. The argument that the previous interpretation should be reconsidered merits careful consideration. 422. We find that the arguments regarding constitutional validity raised in paragraph 5 require a nuanced analysis.",
+    "original_position": {
+      "start_char": 2168,
+      "end_char": 37180
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 76,
+    "sentence_start": 380,
+    "sentence_end": 384,
+    "num_sentences": 5,
+    "text": "423. The unconstitutionality argument raised against Section 45 cannot be summarily dismissed. 424. However, it also cannot be entirely accepted without examining the legislative purpose of Section 45. 425.",
+    "original_position": {
+      "start_char": 19829,
+      "end_char": 20035
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 77,
+    "sentence_start": 385,
+    "sentence_end": 389,
+    "num_sentences": 5,
+    "text": "The purpose of Section 45 as stated in the legislative history is to ensure administrative efficiency. 426. This administrative purpose may justify some restrictions that would otherwise appear discriminatory. PRECEDENT ANALYSIS\n\n427. Regarding the precedent cited in paragraph 11, ABC v. XYZ held that procedural safeguards cannot be bypassed.",
+    "original_position": {
+      "start_char": 2701,
+      "end_char": 37733
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 78,
+    "sentence_start": 390,
+    "sentence_end": 394,
+    "num_sentences": 5,
+    "text": "428. We find this principle applicable because Section 45 does indeed bypass certain procedural safeguards. 429. The High Court's order dismissing the writ petition failed to adequately address this point. 430.",
+    "original_position": {
+      "start_char": 20382,
+      "end_char": 20592
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 79,
+    "sentence_start": 395,
+    "sentence_end": 399,
+    "num_sentences": 5,
+    "text": "Regarding the precedent cited in paragraph 12, DEF v. GHI established that all discrimination requires scrutiny. 431. However, the High Court's order did attempt to distinguish DEF v. GHI on its facts. 432. We find the High Court's distinction to be somewhat weak but not entirely unmeritorious.",
+    "original_position": {
+      "start_char": 3253,
+      "end_char": 38240
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 80,
+    "sentence_start": 400,
+    "sentence_end": 404,
+    "num_sentences": 5,
+    "text": "CONCLUSION\n\n433. For the reasons stated above, we partially allow the appeal. 434. We set aside the High Court's order to the extent it upheld Section 45 without adequate justification. 435.",
+    "original_position": {
+      "start_char": 20890,
+      "end_char": 21080
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 81,
+    "sentence_start": 405,
+    "sentence_end": 409,
+    "num_sentences": 5,
+    "text": "We remit the matter to the High Court for reconsideration in light of this judgment. 436. The High Court shall specifically address the applicability of ABC v. XYZ to the present facts. 437. The matter is accordingly remitted with these observations.",
+    "original_position": {
+      "start_char": 3736,
+      "end_char": 38683
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 82,
+    "sentence_start": 410,
+    "sentence_end": 414,
+    "num_sentences": 5,
+    "text": "ORDERS\n\n438. The appeal is partially allowed as indicated above. 439. The order of the High Court is set aside to the extent indicated. 440.",
+    "original_position": {
+      "start_char": 21333,
+      "end_char": 21473
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 83,
+    "sentence_start": 415,
+    "sentence_end": 419,
+    "num_sentences": 5,
+    "text": "The matter is remitted to the High Court for reconsideration within 6 months. 441. There shall be no order as to costs. 442. The appeal is disposed of accordingly.",
+    "original_position": {
+      "start_char": 4124,
+      "end_char": 38989
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 84,
+    "sentence_start": 420,
+    "sentence_end": 424,
+    "num_sentences": 5,
+    "text": "JUDGMENT\n\n501. This appeal is filed by the appellant challenging the order dated 15th March 2023 passed by the High Court. 502. The appellant contended that the said order violates the fundamental rights guaranteed under Article 21 of the Constitution. 503.",
+    "original_position": {
+      "start_char": 21639,
+      "end_char": 21896
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 85,
+    "sentence_start": 425,
+    "sentence_end": 429,
+    "num_sentences": 5,
+    "text": "On behalf of the respondent, it was submitted that the impugned order is well-reasoned and supported by precedent. FACTS\n\n504. The relevant facts are as follows: The petitioner filed a writ petition challenging the validity of Section 45 of the Act. 505. It was contended that Section 45 is unconstitutional and violates the right to equality under Article 14.",
+    "original_position": {
+      "start_char": 252,
+      "end_char": 35272
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 86,
+    "sentence_start": 430,
+    "sentence_end": 434,
+    "num_sentences": 5,
+    "text": "506. The respondent opposed the petition on the ground that Section 45 has been consistently upheld by various courts. 507. A full bench of the High Court has previously held that Section 45 is constitutionally valid. 508.",
+    "original_position": {
+      "start_char": 22259,
+      "end_char": 22481
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 87,
+    "sentence_start": 435,
+    "sentence_end": 439,
+    "num_sentences": 5,
+    "text": "The impugned order dated 15th March 2023 relied upon this previous decision. LEGAL ARGUMENTS\n\n509. The appellant submits that times have changed and the previous interpretation should be reconsidered. 510. It is argued that there are at least three landmark judgments from the Supreme Court that support the appellant's position.",
+    "original_position": {
+      "start_char": 827,
+      "end_char": 35826
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 88,
+    "sentence_start": 440,
+    "sentence_end": 444,
+    "num_sentences": 5,
+    "text": "511. The first precedent cited is ABC v. XYZ where the Supreme Court held that procedural safeguards are essential. 512. The second precedent is DEF v. GHI which established that discrimination based on gender is unconstitutional. 513.",
+    "original_position": {
+      "start_char": 22813,
+      "end_char": 23048
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 89,
+    "sentence_start": 445,
+    "sentence_end": 449,
+    "num_sentences": 5,
+    "text": "The third precedent is JKL v. MNO which clarified that the burden of proof lies on the State. COURT'S ANALYSIS\n\n514. We have carefully considered the submissions of both parties and the extensive legal precedents cited. 515. Upon examination, we find that the law as stated in ABC v. XYZ is indeed relevant to the present case.",
+    "original_position": {
+      "start_char": 1388,
+      "end_char": 36391
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 90,
+    "sentence_start": 450,
+    "sentence_end": 454,
+    "num_sentences": 5,
+    "text": "516. The reasoning in that judgment directly applies because both cases involve the interpretation of procedural rights. 517. However, the respondent's reliance on earlier precedents is also not entirely misplaced. 518.",
+    "original_position": {
+      "start_char": 23378,
+      "end_char": 23597
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 91,
+    "sentence_start": 455,
+    "sentence_end": 459,
+    "num_sentences": 5,
+    "text": "Those decisions did establish a general principle about the interpretation of such statutes. 519. We note that while those decisions are instructive, they do not directly address the facts presented here. RESOLUTION OF CONTENTIONS\n\n520. Coming back to the contention raised in paragraph 9 above, we must evaluate whether times have indeed changed.",
+    "original_position": {
+      "start_char": 1932,
+      "end_char": 36960
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 92,
+    "sentence_start": 460,
+    "sentence_end": 464,
+    "num_sentences": 5,
+    "text": "521. The argument that the previous interpretation should be reconsidered merits careful consideration. 522. We find that the arguments regarding constitutional validity raised in paragraph 5 require a nuanced analysis. 523.",
+    "original_position": {
+      "start_char": 23947,
+      "end_char": 24171
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 93,
+    "sentence_start": 465,
+    "sentence_end": 469,
+    "num_sentences": 5,
+    "text": "The unconstitutionality argument raised against Section 45 cannot be summarily dismissed. 524. However, it also cannot be entirely accepted without examining the legislative purpose of Section 45. 525. The purpose of Section 45 as stated in the legislative history is to ensure administrative efficiency.",
+    "original_position": {
+      "start_char": 2501,
+      "end_char": 37490
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 94,
+    "sentence_start": 470,
+    "sentence_end": 474,
+    "num_sentences": 5,
+    "text": "526. This administrative purpose may justify some restrictions that would otherwise appear discriminatory. PRECEDENT ANALYSIS\n\n527. Regarding the precedent cited in paragraph 11, ABC v. XYZ held that procedural safeguards cannot be bypassed. 528.",
+    "original_position": {
+      "start_char": 24477,
+      "end_char": 24724
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 95,
+    "sentence_start": 475,
+    "sentence_end": 479,
+    "num_sentences": 5,
+    "text": "We find this principle applicable because Section 45 does indeed bypass certain procedural safeguards. 529. The High Court's order dismissing the writ petition failed to adequately address this point. 530. Regarding the precedent cited in paragraph 12, DEF v. GHI established that all discrimination requires scrutiny.",
+    "original_position": {
+      "start_char": 3049,
+      "end_char": 38057
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 96,
+    "sentence_start": 480,
+    "sentence_end": 484,
+    "num_sentences": 5,
+    "text": "531. However, the High Court's order did attempt to distinguish DEF v. GHI on its facts. 532. We find the High Court's distinction to be somewhat weak but not entirely unmeritorious. CONCLUSION\n\n533.",
+    "original_position": {
+      "start_char": 25044,
+      "end_char": 25244
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 97,
+    "sentence_start": 485,
+    "sentence_end": 489,
+    "num_sentences": 5,
+    "text": "For the reasons stated above, we partially allow the appeal. 534. We set aside the High Court's order to the extent it upheld Section 45 without adequate justification. 535. We remit the matter to the High Court for reconsideration in light of this judgment.",
+    "original_position": {
+      "start_char": 3564,
+      "end_char": 38517
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 98,
+    "sentence_start": 490,
+    "sentence_end": 494,
+    "num_sentences": 5,
+    "text": "536. The High Court shall specifically address the applicability of ABC v. XYZ to the present facts. 537. The matter is accordingly remitted with these observations. ORDERS\n\n538.",
+    "original_position": {
+      "start_char": 25504,
+      "end_char": 25683
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 99,
+    "sentence_start": 495,
+    "sentence_end": 499,
+    "num_sentences": 5,
+    "text": "The appeal is partially allowed as indicated above. 539. The order of the High Court is set aside to the extent indicated. 540. The matter is remitted to the High Court for reconsideration within 6 months.",
+    "original_position": {
+      "start_char": 3998,
+      "end_char": 38903
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 100,
+    "sentence_start": 500,
+    "sentence_end": 504,
+    "num_sentences": 5,
+    "text": "541. There shall be no order as to costs. 542. The appeal is disposed of accordingly. JUDGMENT\n\n601.",
+    "original_position": {
+      "start_char": 25890,
+      "end_char": 25991
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 101,
+    "sentence_start": 505,
+    "sentence_end": 509,
+    "num_sentences": 5,
+    "text": "This appeal is filed by the appellant challenging the order dated 15th March 2023 passed by the High Court. 602. The appellant contended that the said order violates the fundamental rights guaranteed under Article 21 of the Constitution. 603. On behalf of the respondent, it was submitted that the impugned order is well-reasoned and supported by precedent.",
+    "original_position": {
+      "start_char": 13,
+      "end_char": 35025
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 102,
+    "sentence_start": 510,
+    "sentence_end": 514,
+    "num_sentences": 5,
+    "text": "FACTS\n\n604. The relevant facts are as follows: The petitioner filed a writ petition challenging the validity of Section 45 of the Act. 605. It was contended that Section 45 is unconstitutional and violates the right to equality under Article 14. 606.",
+    "original_position": {
+      "start_char": 26351,
+      "end_char": 26601
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 103,
+    "sentence_start": 515,
+    "sentence_end": 519,
+    "num_sentences": 5,
+    "text": "The respondent opposed the petition on the ground that Section 45 has been consistently upheld by various courts. 607. A full bench of the High Court has previously held that Section 45 is constitutionally valid. 608. The impugned order dated 15th March 2023 relied upon this previous decision.",
+    "original_position": {
+      "start_char": 613,
+      "end_char": 35572
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 104,
+    "sentence_start": 520,
+    "sentence_end": 524,
+    "num_sentences": 5,
+    "text": "LEGAL ARGUMENTS\n\n609. The appellant submits that times have changed and the previous interpretation should be reconsidered. 610. It is argued that there are at least three landmark judgments from the Supreme Court that support the appellant's position. 611.",
+    "original_position": {
+      "start_char": 26898,
+      "end_char": 27155
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 105,
+    "sentence_start": 525,
+    "sentence_end": 529,
+    "num_sentences": 5,
+    "text": "The first precedent cited is ABC v. XYZ where the Supreme Court held that procedural safeguards are essential. 612. The second precedent is DEF v. GHI which established that discrimination based on gender is unconstitutional. 613. The third precedent is JKL v. MNO which clarified that the burden of proof lies on the State.",
+    "original_position": {
+      "start_char": 1159,
+      "end_char": 36156
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 106,
+    "sentence_start": 530,
+    "sentence_end": 534,
+    "num_sentences": 5,
+    "text": "COURT'S ANALYSIS\n\n614. We have carefully considered the submissions of both parties and the extensive legal precedents cited. 615. Upon examination, we find that the law as stated in ABC v. XYZ is indeed relevant to the present case. 616.",
+    "original_position": {
+      "start_char": 27482,
+      "end_char": 27720
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 107,
+    "sentence_start": 535,
+    "sentence_end": 539,
+    "num_sentences": 5,
+    "text": "The reasoning in that judgment directly applies because both cases involve the interpretation of procedural rights. 617. However, the respondent's reliance on earlier precedents is also not entirely misplaced. 618. Those decisions did establish a general principle about the interpretation of such statutes.",
+    "original_position": {
+      "start_char": 1719,
+      "end_char": 36704
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 108,
+    "sentence_start": 540,
+    "sentence_end": 544,
+    "num_sentences": 5,
+    "text": "619. We note that while those decisions are instructive, they do not directly address the facts presented here. RESOLUTION OF CONTENTIONS\n\n620. Coming back to the contention raised in paragraph 9 above, we must evaluate whether times have indeed changed. 621.",
+    "original_position": {
+      "start_char": 28029,
+      "end_char": 28289
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 109,
+    "sentence_start": 545,
+    "sentence_end": 549,
+    "num_sentences": 5,
+    "text": "The argument that the previous interpretation should be reconsidered merits careful consideration. 622. We find that the arguments regarding constitutional validity raised in paragraph 5 require a nuanced analysis. 623. The unconstitutionality argument raised against Section 45 cannot be summarily dismissed.",
+    "original_position": {
+      "start_char": 2283,
+      "end_char": 37275
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 110,
+    "sentence_start": 550,
+    "sentence_end": 554,
+    "num_sentences": 5,
+    "text": "624. However, it also cannot be entirely accepted without examining the legislative purpose of Section 45. 625. The purpose of Section 45 as stated in the legislative history is to ensure administrative efficiency. 626.",
+    "original_position": {
+      "start_char": 28600,
+      "end_char": 28819
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 111,
+    "sentence_start": 555,
+    "sentence_end": 559,
+    "num_sentences": 5,
+    "text": "This administrative purpose may justify some restrictions that would otherwise appear discriminatory. PRECEDENT ANALYSIS\n\n627. Regarding the precedent cited in paragraph 11, ABC v. XYZ held that procedural safeguards cannot be bypassed. 628. We find this principle applicable because Section 45 does indeed bypass certain procedural safeguards.",
+    "original_position": {
+      "start_char": 2808,
+      "end_char": 37841
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 112,
+    "sentence_start": 560,
+    "sentence_end": 564,
+    "num_sentences": 5,
+    "text": "629. The High Court's order dismissing the writ petition failed to adequately address this point. 630. Regarding the precedent cited in paragraph 12, DEF v. GHI established that all discrimination requires scrutiny. 631.",
+    "original_position": {
+      "start_char": 29166,
+      "end_char": 29386
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 113,
+    "sentence_start": 565,
+    "sentence_end": 569,
+    "num_sentences": 5,
+    "text": "However, the High Court's order did attempt to distinguish DEF v. GHI on its facts. 632. We find the High Court's distinction to be somewhat weak but not entirely unmeritorious. CONCLUSION\n\n633. For the reasons stated above, we partially allow the appeal.",
+    "original_position": {
+      "start_char": 3370,
+      "end_char": 38319
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 114,
+    "sentence_start": 570,
+    "sentence_end": 574,
+    "num_sentences": 5,
+    "text": "634. We set aside the High Court's order to the extent it upheld Section 45 without adequate justification. 635. We remit the matter to the High Court for reconsideration in light of this judgment. 636.",
+    "original_position": {
+      "start_char": 29644,
+      "end_char": 29846
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 115,
+    "sentence_start": 575,
+    "sentence_end": 579,
+    "num_sentences": 5,
+    "text": "The High Court shall specifically address the applicability of ABC v. XYZ to the present facts. 637. The matter is accordingly remitted with these observations. ORDERS\n\n638. The appeal is partially allowed as indicated above.",
+    "original_position": {
+      "start_char": 3825,
+      "end_char": 38749
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 116,
+    "sentence_start": 580,
+    "sentence_end": 584,
+    "num_sentences": 5,
+    "text": "639. The order of the High Court is set aside to the extent indicated. 640. The matter is remitted to the High Court for reconsideration within 6 months. 641.",
+    "original_position": {
+      "start_char": 30074,
+      "end_char": 30232
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 117,
+    "sentence_start": 585,
+    "sentence_end": 589,
+    "num_sentences": 5,
+    "text": "There shall be no order as to costs. 642. The appeal is disposed of accordingly. JUDGMENT\n\n701. This appeal is filed by the appellant challenging the order dated 15th March 2023 passed by the High Court.",
+    "original_position": {
+      "start_char": 4206,
+      "end_char": 34775
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 118,
+    "sentence_start": 590,
+    "sentence_end": 594,
+    "num_sentences": 5,
+    "text": "702. The appellant contended that the said order violates the fundamental rights guaranteed under Article 21 of the Constitution. 703. On behalf of the respondent, it was submitted that the impugned order is well-reasoned and supported by precedent. FACTS\n\n704.",
+    "original_position": {
+      "start_char": 30438,
+      "end_char": 30700
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 119,
+    "sentence_start": 595,
+    "sentence_end": 599,
+    "num_sentences": 5,
+    "text": "The relevant facts are as follows: The petitioner filed a writ petition challenging the validity of Section 45 of the Act. 705. It was contended that Section 45 is unconstitutional and violates the right to equality under Article 14. 706. The respondent opposed the petition on the ground that Section 45 has been consistently upheld by various courts.",
+    "original_position": {
+      "start_char": 378,
+      "end_char": 35391
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 120,
+    "sentence_start": 600,
+    "sentence_end": 604,
+    "num_sentences": 5,
+    "text": "707. A full bench of the High Court has previously held that Section 45 is constitutionally valid. 708. The impugned order dated 15th March 2023 relied upon this previous decision. LEGAL ARGUMENTS\n\n709.",
+    "original_position": {
+      "start_char": 31054,
+      "end_char": 31257
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 121,
+    "sentence_start": 605,
+    "sentence_end": 609,
+    "num_sentences": 5,
+    "text": "The appellant submits that times have changed and the previous interpretation should be reconsidered. 710. It is argued that there are at least three landmark judgments from the Supreme Court that support the appellant's position. 711. The first precedent cited is ABC v. XYZ where the Supreme Court held that procedural safeguards are essential.",
+    "original_position": {
+      "start_char": 925,
+      "end_char": 35942
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 122,
+    "sentence_start": 610,
+    "sentence_end": 614,
+    "num_sentences": 5,
+    "text": "712. The second precedent is DEF v. GHI which established that discrimination based on gender is unconstitutional. 713. The third precedent is JKL v. MNO which clarified that the burden of proof lies on the State. COURT'S ANALYSIS\n\n714.",
+    "original_position": {
+      "start_char": 31605,
+      "end_char": 31842
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 123,
+    "sentence_start": 615,
+    "sentence_end": 619,
+    "num_sentences": 5,
+    "text": "We have carefully considered the submissions of both parties and the extensive legal precedents cited. 715. Upon examination, we find that the law as stated in ABC v. XYZ is indeed relevant to the present case. 716. The reasoning in that judgment directly applies because both cases involve the interpretation of procedural rights.",
+    "original_position": {
+      "start_char": 1505,
+      "end_char": 36512
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 124,
+    "sentence_start": 620,
+    "sentence_end": 624,
+    "num_sentences": 5,
+    "text": "717. However, the respondent's reliance on earlier precedents is also not entirely misplaced. 718. Those decisions did establish a general principle about the interpretation of such statutes. 719.",
+    "original_position": {
+      "start_char": 32175,
+      "end_char": 32371
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 125,
+    "sentence_start": 625,
+    "sentence_end": 629,
+    "num_sentences": 5,
+    "text": "We note that while those decisions are instructive, they do not directly address the facts presented here. RESOLUTION OF CONTENTIONS\n\n720. Coming back to the contention raised in paragraph 9 above, we must evaluate whether times have indeed changed. 721. The argument that the previous interpretation should be reconsidered merits careful consideration.",
+    "original_position": {
+      "start_char": 2029,
+      "end_char": 37064
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 126,
+    "sentence_start": 630,
+    "sentence_end": 634,
+    "num_sentences": 5,
+    "text": "722. We find that the arguments regarding constitutional validity raised in paragraph 5 require a nuanced analysis. 723. The unconstitutionality argument raised against Section 45 cannot be summarily dismissed. 724.",
+    "original_position": {
+      "start_char": 32727,
+      "end_char": 32942
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 127,
+    "sentence_start": 635,
+    "sentence_end": 639,
+    "num_sentences": 5,
+    "text": "However, it also cannot be entirely accepted without examining the legislative purpose of Section 45. 725. The purpose of Section 45 as stated in the legislative history is to ensure administrative efficiency. 726. This administrative purpose may justify some restrictions that would otherwise appear discriminatory.",
+    "original_position": {
+      "start_char": 2595,
+      "end_char": 37597
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 128,
+    "sentence_start": 640,
+    "sentence_end": 644,
+    "num_sentences": 5,
+    "text": "PRECEDENT ANALYSIS\n\n727. Regarding the precedent cited in paragraph 11, ABC v. XYZ held that procedural safeguards cannot be bypassed. 728. We find this principle applicable because Section 45 does indeed bypass certain procedural safeguards. 729.",
+    "original_position": {
+      "start_char": 33261,
+      "end_char": 33508
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 129,
+    "sentence_start": 645,
+    "sentence_end": 649,
+    "num_sentences": 5,
+    "text": "The High Court's order dismissing the writ petition failed to adequately address this point. 730. Regarding the precedent cited in paragraph 12, DEF v. GHI established that all discrimination requires scrutiny. 731. However, the High Court's order did attempt to distinguish DEF v. GHI on its facts.",
+    "original_position": {
+      "start_char": 3156,
+      "end_char": 38146
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 130,
+    "sentence_start": 650,
+    "sentence_end": 654,
+    "num_sentences": 5,
+    "text": "732. We find the High Court's distinction to be somewhat weak but not entirely unmeritorious. CONCLUSION\n\n733. For the reasons stated above, we partially allow the appeal. 734.",
+    "original_position": {
+      "start_char": 33809,
+      "end_char": 33986
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 131,
+    "sentence_start": 655,
+    "sentence_end": 659,
+    "num_sentences": 5,
+    "text": "We set aside the High Court's order to the extent it upheld Section 45 without adequate justification. 735. We remit the matter to the High Court for reconsideration in light of this judgment. 736. The High Court shall specifically address the applicability of ABC v. XYZ to the present facts.",
+    "original_position": {
+      "start_char": 3629,
+      "end_char": 38618
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 132,
+    "sentence_start": 660,
+    "sentence_end": 664,
+    "num_sentences": 5,
+    "text": "737. The matter is accordingly remitted with these observations. ORDERS\n\n738. The appeal is partially allowed as indicated above. 739.",
+    "original_position": {
+      "start_char": 34281,
+      "end_char": 34416
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 133,
+    "sentence_start": 665,
+    "sentence_end": 669,
+    "num_sentences": 5,
+    "text": "The order of the High Court is set aside to the extent indicated. 740. The matter is remitted to the High Court for reconsideration within 6 months. 741. There shall be no order as to costs.",
+    "original_position": {
+      "start_char": 4054,
+      "end_char": 38945
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 134,
+    "sentence_start": 670,
+    "sentence_end": 674,
+    "num_sentences": 5,
+    "text": "742. The appeal is disposed of accordingly. JUDGMENT\n\n801. This appeal is filed by the appellant challenging the order dated 15th March 2023 passed by the High Court. 802.",
+    "original_position": {
+      "start_char": 34608,
+      "end_char": 34780
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 135,
+    "sentence_start": 675,
+    "sentence_end": 679,
+    "num_sentences": 5,
+    "text": "The appellant contended that the said order violates the fundamental rights guaranteed under Article 21 of the Constitution. 803. On behalf of the respondent, it was submitted that the impugned order is well-reasoned and supported by precedent. FACTS\n\n804. The relevant facts are as follows: The petitioner filed a writ petition challenging the validity of Section 45 of the Act.",
+    "original_position": {
+      "start_char": 124,
+      "end_char": 35161
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 136,
+    "sentence_start": 680,
+    "sentence_end": 684,
+    "num_sentences": 5,
+    "text": "805. It was contended that Section 45 is unconstitutional and violates the right to equality under Article 14. 806. The respondent opposed the petition on the ground that Section 45 has been consistently upheld by various courts. 807.",
+    "original_position": {
+      "start_char": 35162,
+      "end_char": 35396
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 137,
+    "sentence_start": 685,
+    "sentence_end": 689,
+    "num_sentences": 5,
+    "text": "A full bench of the High Court has previously held that Section 45 is constitutionally valid. 808. The impugned order dated 15th March 2023 relied upon this previous decision. LEGAL ARGUMENTS\n\n809. The appellant submits that times have changed and the previous interpretation should be reconsidered.",
+    "original_position": {
+      "start_char": 730,
+      "end_char": 35697
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 138,
+    "sentence_start": 690,
+    "sentence_end": 694,
+    "num_sentences": 5,
+    "text": "810. It is argued that there are at least three landmark judgments from the Supreme Court that support the appellant's position. 811. The first precedent cited is ABC v. XYZ where the Supreme Court held that procedural safeguards are essential. 812.",
+    "original_position": {
+      "start_char": 35698,
+      "end_char": 35947
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 139,
+    "sentence_start": 695,
+    "sentence_end": 699,
+    "num_sentences": 5,
+    "text": "The second precedent is DEF v. GHI which established that discrimination based on gender is unconstitutional. 813. The third precedent is JKL v. MNO which clarified that the burden of proof lies on the State. COURT'S ANALYSIS\n\n814. We have carefully considered the submissions of both parties and the extensive legal precedents cited.",
+    "original_position": {
+      "start_char": 1274,
+      "end_char": 36283
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 140,
+    "sentence_start": 700,
+    "sentence_end": 704,
+    "num_sentences": 5,
+    "text": "815. Upon examination, we find that the law as stated in ABC v. XYZ is indeed relevant to the present case. 816. The reasoning in that judgment directly applies because both cases involve the interpretation of procedural rights. 817.",
+    "original_position": {
+      "start_char": 36284,
+      "end_char": 36517
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 141,
+    "sentence_start": 705,
+    "sentence_end": 709,
+    "num_sentences": 5,
+    "text": "However, the respondent's reliance on earlier precedents is also not entirely misplaced. 818. Those decisions did establish a general principle about the interpretation of such statutes. 819. We note that while those decisions are instructive, they do not directly address the facts presented here.",
+    "original_position": {
+      "start_char": 1839,
+      "end_char": 36816
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 142,
+    "sentence_start": 710,
+    "sentence_end": 714,
+    "num_sentences": 5,
+    "text": "RESOLUTION OF CONTENTIONS\n\n820. Coming back to the contention raised in paragraph 9 above, we must evaluate whether times have indeed changed. 821. The argument that the previous interpretation should be reconsidered merits careful consideration. 822.",
+    "original_position": {
+      "start_char": 36818,
+      "end_char": 37069
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 143,
+    "sentence_start": 715,
+    "sentence_end": 719,
+    "num_sentences": 5,
+    "text": "We find that the arguments regarding constitutional validity raised in paragraph 5 require a nuanced analysis. 823. The unconstitutionality argument raised against Section 45 cannot be summarily dismissed. 824. However, it also cannot be entirely accepted without examining the legislative purpose of Section 45.",
+    "original_position": {
+      "start_char": 2386,
+      "end_char": 37382
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 144,
+    "sentence_start": 720,
+    "sentence_end": 724,
+    "num_sentences": 5,
+    "text": "825. The purpose of Section 45 as stated in the legislative history is to ensure administrative efficiency. 826. This administrative purpose may justify some restrictions that would otherwise appear discriminatory. PRECEDENT ANALYSIS\n\n827.",
+    "original_position": {
+      "start_char": 37383,
+      "end_char": 37623
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 145,
+    "sentence_start": 725,
+    "sentence_end": 729,
+    "num_sentences": 5,
+    "text": "Regarding the precedent cited in paragraph 11, ABC v. XYZ held that procedural safeguards cannot be bypassed. 828. We find this principle applicable because Section 45 does indeed bypass certain procedural safeguards. 829. The High Court's order dismissing the writ petition failed to adequately address this point.",
+    "original_position": {
+      "start_char": 2935,
+      "end_char": 37939
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 146,
+    "sentence_start": 730,
+    "sentence_end": 734,
+    "num_sentences": 5,
+    "text": "830. Regarding the precedent cited in paragraph 12, DEF v. GHI established that all discrimination requires scrutiny. 831. However, the High Court's order did attempt to distinguish DEF v. GHI on its facts. 832.",
+    "original_position": {
+      "start_char": 37940,
+      "end_char": 38151
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 147,
+    "sentence_start": 735,
+    "sentence_end": 739,
+    "num_sentences": 5,
+    "text": "We find the High Court's distinction to be somewhat weak but not entirely unmeritorious. CONCLUSION\n\n833. For the reasons stated above, we partially allow the appeal. 834. We set aside the High Court's order to the extent it upheld Section 45 without adequate justification.",
+    "original_position": {
+      "start_char": 3458,
+      "end_char": 38427
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 148,
+    "sentence_start": 740,
+    "sentence_end": 744,
+    "num_sentences": 5,
+    "text": "835. We remit the matter to the High Court for reconsideration in light of this judgment. 836. The High Court shall specifically address the applicability of ABC v. XYZ to the present facts. 837.",
+    "original_position": {
+      "start_char": 38428,
+      "end_char": 38623
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 149,
+    "sentence_start": 745,
+    "sentence_end": 749,
+    "num_sentences": 5,
+    "text": "The matter is accordingly remitted with these observations. ORDERS\n\n838. The appeal is partially allowed as indicated above. 839. The order of the High Court is set aside to the extent indicated.",
+    "original_position": {
+      "start_char": 3925,
+      "end_char": 38820
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 150,
+    "sentence_start": 750,
+    "sentence_end": 754,
+    "num_sentences": 5,
+    "text": "840. The matter is remitted to the High Court for reconsideration within 6 months. 841. There shall be no order as to costs. 842.",
+    "original_position": {
+      "start_char": 38821,
+      "end_char": 38950
+    },
+    "embedding_shape": [
+      384
+    ]
+  },
+  {
+    "document_id": "test_judgment_001",
+    "passage_id": 151,
+    "sentence_start": 755,
+    "sentence_end": 755,
+    "num_sentences": 1,
+    "text": "The appeal is disposed of accordingly.",
+    "original_position": {
+      "start_char": 4247,
+      "end_char": 38989
+    },
+    "embedding_shape": [
+      384
+    ]
+  }
+]

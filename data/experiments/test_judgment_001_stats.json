@@ -1,0 +1,20 @@
+{
+  "stats": {
+    "total_passages": 152,
+    "embedding_dimension": 384,
+    "processing_time_seconds": 4.1925,
+    "batch_size": 32,
+    "num_batches": 5,
+    "texts_per_second": 36.25,
+    "sentences_per_passage": 5,
+    "total_sentences": 756,
+    "total_characters": 38989,
+    "total_words": 6093,
+    "document_id": "test_judgment_001"
+  },
+  "verification": {
+    "valid": true,
+    "num_passages": 152,
+    "issues": []
+  }
+}

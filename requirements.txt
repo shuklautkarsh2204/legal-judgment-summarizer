@@ -75,4 +75,4 @@ wandb>=0.21.0
 # Graph Processing (Optional)
 # ==============================
 networkx>=3.5
-pytesseraact
+pytesseract>=0.3.12
