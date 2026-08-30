@@ -1,0 +1,46 @@
+{
+  "experiment": "Gap 2 document-level classification",
+  "model": "all-MiniLM-L6-v2",
+  "classifier": "LogisticRegression",
+  "labels": [
+    "Subsumtion",
+    "Vorherige Rechtsprechung des EGMR",
+    "Verhältnismäßigkeitsprüfung – Angemessenheit",
+    "Entscheidung des EGMR"
+  ],
+  "samples_per_label": 1000,
+  "test_size": 0.2,
+  "random_state": 42,
+  "split_strategy": "document-level",
+  "train_documents": 250,
+  "test_documents": 63,
+  "accuracy": 0.7327249022164276,
+  "macro_f1": 0.7323222978035862,
+  "weighted_f1": 0.7286394495991251,
+  "confusion_matrix": [
+    [
+      113,
+      35,
+      43,
+      17
+    ],
+    [
+      9,
+      132,
+      12,
+      1
+    ],
+    [
+      31,
+      41,
+      142,
+      1
+    ],
+    [
+      10,
+      5,
+      0,
+      175
+    ]
+  ]
+}

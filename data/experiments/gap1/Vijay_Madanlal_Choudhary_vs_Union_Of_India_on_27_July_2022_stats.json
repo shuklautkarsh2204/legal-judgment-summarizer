@@ -2,10 +2,10 @@
   "stats": {
     "total_passages": 913,
     "embedding_dimension": 384,
-    "processing_time_seconds": 122.4884,
+    "processing_time_seconds": 141.8316,
     "batch_size": 32,
     "num_batches": 29,
-    "texts_per_second": 7.45,
+    "texts_per_second": 6.44,
     "sentences_per_passage": 5,
     "total_sentences": 4562,
     "total_characters": 764313,

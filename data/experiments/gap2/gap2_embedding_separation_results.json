@@ -1,0 +1,41 @@
+{
+  "model": "all-MiniLM-L6-v2",
+  "labels": [
+    "Subsumtion",
+    "Vorherige Rechtsprechung des EGMR",
+    "Verhältnismäßigkeitsprüfung – Angemessenheit",
+    "Entscheidung des EGMR"
+  ],
+  "samples_per_label": 300,
+  "similarity_matrix": {
+    "Subsumtion": {
+      "Subsumtion": 0.3814801871776581,
+      "Vorherige Rechtsprechung des EGMR": 0.324585884809494,
+      "Verhältnismäßigkeitsprüfung – Angemessenheit": 0.33073416352272034,
+      "Entscheidung des EGMR": 0.34148845076560974
+    },
+    "Vorherige Rechtsprechung des EGMR": {
+      "Subsumtion": 0.324585884809494,
+      "Vorherige Rechtsprechung des EGMR": 0.3557054400444031,
+      "Verhältnismäßigkeitsprüfung – Angemessenheit": 0.31269001960754395,
+      "Entscheidung des EGMR": 0.3235079050064087
+    },
+    "Verhältnismäßigkeitsprüfung – Angemessenheit": {
+      "Subsumtion": 0.33073416352272034,
+      "Vorherige Rechtsprechung des EGMR": 0.31269001960754395,
+      "Verhältnismäßigkeitsprüfung – Angemessenheit": 0.34461891651153564,
+      "Entscheidung des EGMR": 0.2849254012107849
+    },
+    "Entscheidung des EGMR": {
+      "Subsumtion": 0.34148845076560974,
+      "Vorherige Rechtsprechung des EGMR": 0.3235079050064087,
+      "Verhältnismäßigkeitsprüfung – Angemessenheit": 0.2849254012107849,
+      "Entscheidung des EGMR": 0.5034579038619995
+    }
+  },
+  "separation": {
+    "within_class_similarity": 0.3963155746459961,
+    "between_class_similarity": 0.31965529918670654,
+    "separation_gap": 0.07666027545928955
+  }
+}
