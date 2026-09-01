@@ -6,6 +6,12 @@ Investigates whether relationships between legally functional passages can be de
 - Document proximity / passage distance
 - Legal-function information (actors, argument types)
 
+CRITICAL FIX:
+- This version uses ORIGINAL DOCUMENT TEXTS from RMU:ECHR XMI files
+- All character offsets refer to the ORIGINAL documents, NOT synthetic reconstructions
+- No synthetic "[... X chars omitted ...]" text is used
+- Annotation offsets are validated against the original document text
+
 This is an exploratory experiment. Results are DESCRIPTIVE ONLY.
 No final relationship classifier is built.
 No unsupported causal claims are made.
@@ -27,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from backend.app.services.passage_builder import PassageBuilder
 from backend.app.services.semantic_analyzer import SemanticAnalyzer
 from backend.app.services.preprocessing import split_into_sentences
+from backend.app.experiment_ip.gap3.document_loader import DocumentLoader
 
 # Set random seed for reproducibility
 RANDOM_SEED = 42
@@ -122,6 +129,98 @@ class Gap3Analyzer:
         self.pairs: List[PassagePair] = []
         
         self.results = {}
+        self.loader: Optional[DocumentLoader] = None
+        self.document_texts: Dict[str, str] = {}
+        self.validation_report = {}
+    
+    def validate_annotations_and_documents(
+        self,
+        document_texts: Dict[str, str],
+        loader: DocumentLoader,
+        sample_size: int = 50
+    ):
+        """
+        Validate that annotations have correct offsets in original documents.
+        
+        Args:
+            document_texts: Dict of document_id -> text
+            loader: DocumentLoader instance
+            sample_size: Number of annotations to sample for detailed checking
+        """
+        print("\n" + "="*70)
+        print("VALIDATION: ANNOTATIONS AND ORIGINAL DOCUMENTS")
+        print("="*70)
+        
+        self.loader = loader
+        self.document_texts = document_texts
+        
+        # Overall statistics
+        total_annotations = len(self.annotations)
+        docs_with_text = len(document_texts)
+        docs_with_annotations = len(set(a.document_id for a in self.annotations))
+        
+        print(f"\nDocuments with original text: {docs_with_text}")
+        print(f"Documents referenced in annotations: {docs_with_annotations}")
+        
+        # Validate a sample of annotations
+        valid_count = 0
+        invalid_count = 0
+        text_mismatch_count = 0
+        
+        sample_annotations = random.sample(
+            self.annotations,
+            min(sample_size, len(self.annotations))
+        )
+        
+        print(f"\nValidating sample of {len(sample_annotations)} annotations...")
+        
+        for ann in sample_annotations:
+            doc_text = document_texts.get(ann.document_id)
+            if doc_text is None:
+                invalid_count += 1
+                continue
+            
+            # Validate offset
+            is_valid, msg = loader.validate_annotation_offset(
+                ann.document_id,
+                ann.begin,
+                ann.end,
+                ann.text
+            )
+            
+            if is_valid:
+                valid_count += 1
+                if "mismatch" in msg.lower():
+                    text_mismatch_count += 1
+            else:
+                invalid_count += 1
+                print(f"  INVALID: {ann.document_id} [{ann.begin}:{ann.end}]: {msg}")
+        
+        self.validation_report = {
+            'total_annotations': total_annotations,
+            'docs_with_original_text': docs_with_text,
+            'docs_referenced': docs_with_annotations,
+            'sample_size': len(sample_annotations),
+            'sample_valid': valid_count,
+            'sample_invalid': invalid_count,
+            'sample_text_mismatches': text_mismatch_count,
+            'synthetic_reconstruction_used': False,
+        }
+        
+        print(f"\nValidation Results (sample of {len(sample_annotations)}):")
+        print(f"  Valid offsets: {valid_count}")
+        print(f"  Invalid offsets: {invalid_count}")
+        print(f"  Text mismatches: {text_mismatch_count}")
+        
+        if invalid_count > 0:
+            print(f"\nWARNING: Found {invalid_count} invalid annotations in sample")
+            print("Some annotations may have incorrect offsets in original documents")
+        
+        if text_mismatch_count > 0:
+            print(f"\nNOTE: Found {text_mismatch_count} text mismatches")
+            print("This may indicate whitespace normalization or minor formatting differences")
+        
+        return valid_count > 0
     
     def load_annotations(self, annotation_path):
         """Load RMU:ECHR annotations."""
@@ -603,10 +702,13 @@ class Gap3Analyzer:
         
         results = {
             'metadata': {
-                'experiment': 'Gap 3 - Passage Relationship Signals',
+                'experiment': 'Gap 3 - Passage Relationship Signals (CORRECTED with Original Documents)',
                 'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
                 'random_seed': self.random_seed,
+                'coordinate_system': 'Original RMU:ECHR document character offsets (NOT synthetic)',
+                'synthetic_reconstruction': False,
             },
+            'validation': self.validation_report,
             'dataset_statistics': {
                 'total_annotations': len(self.annotations),
                 'unique_documents': len(self.passages_by_doc),
@@ -627,6 +729,13 @@ class Gap3Analyzer:
                 'Passages overlap annotations imperfectly; multiple labels per passage are possible.',
                 'No external ground-truth relationship labels are used or inferred.',
                 'This is an exploratory analysis to assess feasibility of passage-level relationship graphs.',
+            ],
+            'corrections_from_v1': [
+                'NOW USES ORIGINAL RMU:ECHR DOCUMENT TEXTS (loaded from XMI files)',
+                'Character offsets refer to original documents, NOT synthetic reconstructions',
+                'Removed "[... X chars omitted ...]" synthetic document markers',
+                'Annotations mapped to passages using original document coordinates',
+                'All passage distances calculated from original document structure',
             ],
         }
         
@@ -678,71 +787,59 @@ class Gap3Analyzer:
 
 def load_document_texts(annotation_path: Path):
     """
-    Load or construct document texts from RMU:ECHR annotations.
+    Load ORIGINAL document texts from RMU:ECHR XMI files.
     
-    Since we don't have full original judgment texts for ECHR cases,
-    we construct synthetic documents by concatenating annotation texts
-    grouped by document_id. This preserves document structure for analysis.
+    The RMU:ECHR dataset annotations contain character offsets (begin/end)
+    that refer to positions in the ORIGINAL judgment documents.
+    
+    To use these offsets correctly, we must load the original document texts
+    from the RMU:ECHR XMI files, not construct synthetic documents.
     
     Args:
-        annotation_path: Path to rmu_echr_annotations.json
+        annotation_path: Path to rmu_echr_annotations.json (used to identify documents)
         
     Returns:
-        Dict mapping document_id to full text
+        Dict mapping document_id to full original text
     """
-    document_texts = {}
-    
-    print("Loading annotations to construct document texts...")
-    
     if not annotation_path.exists():
-        print(f"WARNING: Annotation file not found at {annotation_path}")
+        print(f"ERROR: Annotation file not found at {annotation_path}")
         return {}
     
+    print("\n" + "="*70)
+    print("LOADING ORIGINAL DOCUMENT TEXTS FROM RMU:ECHR XMI FILES")
+    print("="*70)
+    
+    # Load annotations to get list of document IDs
     with open(annotation_path, 'r', encoding='utf-8') as f:
         annotations = json.load(f)
     
-    # Group annotations by document_id
-    docs = defaultdict(list)
-    for ann in annotations:
-        docs[ann['document_id']].append(ann)
+    # Use DocumentLoader to load original texts
+    loader = DocumentLoader()
+    unique_doc_ids = set(ann['document_id'] for ann in annotations)
     
-    # For each document, construct text by sorting annotations by character position
-    # and concatenating them with separators
-    for doc_id, doc_annotations in docs.items():
-        # Sort by begin position
-        doc_annotations_sorted = sorted(doc_annotations, key=lambda x: x['begin'])
-        
-        # Build synthetic document text with annotations and gaps
-        # This preserves the order and positions as they appear in the original judgment
-        text_parts = []
-        last_end = 0
-        
-        for ann in doc_annotations_sorted:
-            begin = ann['begin']
-            end = ann['end']
-            text = ann['text']
-            
-            # Add separator if there's a gap
-            if begin > last_end and last_end > 0:
-                gap_chars = begin - last_end
-                text_parts.append(f" [... {gap_chars} chars omitted ...] ")
-            
-            text_parts.append(text)
-            last_end = end
-        
-        full_text = "".join(text_parts)
-        document_texts[doc_id] = full_text
+    print(f"\nLoading {len(unique_doc_ids)} unique documents from XMI files...")
+    document_texts = loader.load_all_documents(unique_doc_ids)
     
-    print(f"Constructed {len(document_texts)} synthetic documents from annotations")
-    print(f"Average annotations per document: {len(annotations) / len(document_texts):.1f}")
+    loader.print_load_report()
     
-    return document_texts
+    if not document_texts:
+        print("\nCRITICAL ERROR: No original document texts could be loaded.")
+        print("Ensure RMU:ECHR gold_data directory is available at:")
+        print(f"  {loader.gold_data_dir}")
+        return {}
+    
+    print(f"\nSuccessfully loaded {len(document_texts)} document texts")
+    print(f"Annotations reference {len(unique_doc_ids)} unique documents")
+    print(f"Missing documents: {len(unique_doc_ids) - len(document_texts)}")
+    
+    return document_texts, loader, annotations
 
 
 def main():
     """Main experiment runner."""
     print("="*70)
     print("RMU:ECHR GAP 3 — PASSAGE RELATIONSHIP SIGNAL EXPERIMENT")
+    print("CORRECTED VERSION: Using Original Documents from RMU:ECHR XMI Files")
     print("="*70)
     
     # Paths
@@ -760,13 +857,30 @@ def main():
     # Load annotations
     unique_docs = analyzer.load_annotations(annotation_path)
     
-    # Load/construct document texts from annotations
-    print("\nLoading/constructing document texts from annotations...")
-    document_texts = load_document_texts(annotation_path)
+    # Load ORIGINAL document texts from RMU:ECHR XMI files
+    print("\nLoading original document texts from RMU:ECHR XMI files...")
+    result = load_document_texts(annotation_path)
+    
+    if isinstance(result, tuple):
+        document_texts, loader, annotations_from_json = result
+    else:
+        print("ERROR: Failed to load document texts")
+        return
     
     if not document_texts:
-        print("ERROR: No document texts could be loaded.")
+        print("CRITICAL ERROR: No document texts could be loaded.")
+        print("Cannot proceed without original RMU:ECHR documents.")
         return
+    
+    # Validate annotations against original documents
+    validation_ok = analyzer.validate_annotations_and_documents(
+        document_texts,
+        loader,
+        sample_size=50
+    )
+    
+    if not validation_ok:
+        print("\nWARNING: Validation found some issues, but proceeding...")
     
     # Build passages with embeddings
     analyzer.build_passages_for_docs(document_texts)
@@ -785,15 +899,21 @@ def main():
         analyzer.analyze_argument_type_transitions()
         analyzer.combined_signal_analysis()
         
-        # Save results
+        # Save results to new output file
         output_dir.mkdir(parents=True, exist_ok=True)
-        analyzer.generate_results_json(output_dir / "gap3_relationship_analysis.json")
+        analyzer.generate_results_json(
+            output_dir / "gap3_real_document_relationship_results.json"
+        )
+        
+        # Also save validation report separately
+        with open(output_dir / "gap3_real_document_validation.json", 'w', encoding='utf-8') as f:
+            json.dump(analyzer.validation_report, f, indent=2)
         
         # Print summary
         analyzer.print_summary_report()
     else:
-        print("\nWARNING: No passages were built. Cannot proceed with analysis.")
-        print("Ensure document texts are available or modify load_document_texts().")
+        print("\nERROR: No passages were built. Cannot proceed with analysis.")
+        print("Check that original documents were loaded successfully.")
 
 
 if __name__ == "__main__":
