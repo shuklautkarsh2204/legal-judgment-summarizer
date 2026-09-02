@@ -9,7 +9,7 @@ RMU:ECHR Annotations (JSON)
     ↓
 Load Annotations → Group by doc_id
     ↓
-Construct Synthetic Documents (annotation text concatenation)
+  Load Original RMU:ECHR Document Texts
     ↓
 Build Passages (5 sentences/passage, preserve position)
     ↓
@@ -47,17 +47,17 @@ class PassageInfo:
     document_id: str
     passage_index: int                         # Sequential passage ID within document
     text: str                                  # Full passage text
-    begin_char: int                            # Start position in synthetic document
-    end_char: int                              # End position in synthetic document
+    begin_char: int                            # Start position in original document
+    end_char: int                              # End position in original document
     embedding: np.ndarray                      # 384-dimensional embedding
     overlapping_annotations: List[Annotation]  # Annotations that overlap this passage
 ```
 
 Methods:
-- `get_actors()` → List[str]  — unique actors in overlapping annotations
-- `get_argument_types()` → List[str]  — unique argument types
-- `primary_actor()` → Optional[str]  — single actor if exactly one
-- `primary_argument_type()` → Optional[str]  — single type if exactly one
+- `get_actors()` → List[str]  — sorted unique actors in overlapping annotations
+- `get_argument_types()` → List[str]  — sorted unique argument types
+- `primary_actor()` → Optional[str]  — dominant actor by frequency, or None on a highest-frequency tie
+- `primary_argument_type()` → Optional[str]  — dominant type by frequency, or None on a highest-frequency tie
 
 ### PassagePair
 
@@ -100,7 +100,7 @@ Main orchestrator class with methods:
 ## Passage Construction Algorithm
 
 ### Input
-Synthetic document text (concatenated annotation snippets)
+Original RMU:ECHR document text
 
 ### Process
 1. **Sentence Splitting**: `split_into_sentences()` → List[str]
@@ -109,6 +109,8 @@ Synthetic document text (concatenated annotation snippets)
 4. **Annotation Mapping**: For each passage, find overlapping annotations
 
 Key property: Preserves original character positions for annotation alignment
+
+All annotations are validated before passage construction. Boundary-invalid annotations and stored-text mismatches are counted and recorded separately.
 
 ### Output
 List[PassageInfo] with embeddings
@@ -166,11 +168,12 @@ actors_j = get_actors(passage_j)
 same_actor = (actors_i ∩ actors_j) ≠ ∅    if both have actors
            = None                          if either is empty
 
-actor_transition = (actors_i[0], actors_j[0])  if both have actors
+actor_transition = (primary_actor_i, primary_actor_j)  if both have actors
+                   where each primary is the unique frequency winner, otherwise None
 ```
 
 ### Argument Type Information
-Similar to actor information
+Similar to actor information: use the unique frequency winner for each passage when available; use None for a highest-frequency tie. The complete multi-label sets remain available for intersection checks.
 
 ## Analysis Methods
 

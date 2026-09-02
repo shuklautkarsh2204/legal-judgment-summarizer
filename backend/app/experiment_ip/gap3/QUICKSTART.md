@@ -68,7 +68,7 @@ The experiment proceeds through these phases:
 - Reports statistics (15,211 annotations, 375 documents, 5 actors, 15 argument types)
 
 ### 2. Build Passages
-- Constructs synthetic documents from annotation text snippets
+- Builds passages from the original RMU:ECHR document text
 - Groups annotations by document_id
 - Sorts by character position to maintain order
 - Builds passages (5 sentences per passage by default)
@@ -84,8 +84,9 @@ For each pair:
 - Semantic cosine similarity (0-1)
 - Passage distance (passage index difference)
 - Character distance
-- Actor transitions (actor_i → actor_j)
-- Argument-type transitions (type_i → type_j)
+- Actor transitions using deterministic dominant labels when there is a clear frequency winner
+- Argument-type transitions using deterministic dominant labels when there is a clear frequency winner
+- Multi-label actor/type sets remain available for overlap checks
 
 ### 5. Analyze Results
 - Semantic similarity grouped by distance
@@ -242,7 +243,7 @@ Experiment Summary
 ## Important Limitations
 
 1. **No gold labels**: RMU:ECHR is NOT a ground-truth passage relationship database
-2. **Synthetic documents**: Passages are constructed from annotation snippets, not actual judgment texts
+2. **Original-document coverage**: Some annotations may not overlap a constructed passage
 3. **Single perspective**: Only looking at RMU:ECHR annotations; other relationship signals may exist
 4. **No causal inference**: Observed patterns don't imply causation
 5. **Limited document coverage**: Analysis uses only documents with RMU:ECHR annotations

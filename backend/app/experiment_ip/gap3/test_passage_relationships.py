@@ -23,7 +23,7 @@ import time
 import random
 import numpy as np
 from pathlib import Path
-from collections import defaultdict
+from collections import Counter, defaultdict
 from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass, asdict
 
@@ -65,21 +65,30 @@ class PassageInfo:
     
     def get_actors(self):
         """Get unique actors in overlapping annotations."""
-        return list(set(a.actor for a in self.overlapping_annotations))
+        return sorted({a.actor for a in self.overlapping_annotations})
     
     def get_argument_types(self):
         """Get unique argument types in overlapping annotations."""
-        return list(set(a.argument_type for a in self.overlapping_annotations))
+        return sorted({a.argument_type for a in self.overlapping_annotations})
     
     def primary_actor(self):
-        """Get dominant/primary actor if any."""
-        actors = self.get_actors()
-        return actors[0] if len(actors) == 1 else None
+        """Get the unique dominant actor, or None when the highest count ties."""
+        counts = Counter(a.actor for a in self.overlapping_annotations)
+        if not counts:
+            return None
+        highest_count = max(counts.values())
+        dominant = [actor for actor, count in counts.items() if count == highest_count]
+        return dominant[0] if len(dominant) == 1 else None
     
     def primary_argument_type(self):
-        """Get dominant/primary argument type if any."""
-        types = self.get_argument_types()
-        return types[0] if len(types) == 1 else None
+        """Get the unique dominant argument type, or None when the highest count ties."""
+        counts = Counter(a.argument_type for a in self.overlapping_annotations)
+        if not counts:
+            return None
+        highest_count = max(counts.values())
+        dominant = [argument_type for argument_type, count in counts.items()
+                    if count == highest_count]
+        return dominant[0] if len(dominant) == 1 else None
 
 
 @dataclass
@@ -136,8 +145,7 @@ class Gap3Analyzer:
     def validate_annotations_and_documents(
         self,
         document_texts: Dict[str, str],
-        loader: DocumentLoader,
-        sample_size: int = 50
+        loader: DocumentLoader
     ):
         """
         Validate that annotations have correct offsets in original documents.
@@ -145,7 +153,6 @@ class Gap3Analyzer:
         Args:
             document_texts: Dict of document_id -> text
             loader: DocumentLoader instance
-            sample_size: Number of annotations to sample for detailed checking
         """
         print("\n" + "="*70)
         print("VALIDATION: ANNOTATIONS AND ORIGINAL DOCUMENTS")
@@ -162,22 +169,25 @@ class Gap3Analyzer:
         print(f"\nDocuments with original text: {docs_with_text}")
         print(f"Documents referenced in annotations: {docs_with_annotations}")
         
-        # Validate a sample of annotations
+        # Validate every annotation against the original document coordinate system.
         valid_count = 0
         invalid_count = 0
         text_mismatch_count = 0
-        
-        sample_annotations = random.sample(
-            self.annotations,
-            min(sample_size, len(self.annotations))
-        )
-        
-        print(f"\nValidating sample of {len(sample_annotations)} annotations...")
-        
-        for ann in sample_annotations:
+        invalid_offset_details = []
+        text_mismatch_details = []
+
+        print(f"\nValidating FULL annotation set ({total_annotations} annotations)...")
+
+        for ann in self.annotations:
             doc_text = document_texts.get(ann.document_id)
             if doc_text is None:
                 invalid_count += 1
+                invalid_offset_details.append({
+                    'document_id': ann.document_id,
+                    'begin': ann.begin,
+                    'end': ann.end,
+                    'reason': 'Document not found',
+                })
                 continue
             
             # Validate offset
@@ -192,28 +202,43 @@ class Gap3Analyzer:
                 valid_count += 1
                 if "mismatch" in msg.lower():
                     text_mismatch_count += 1
+                    text_mismatch_details.append({
+                        'document_id': ann.document_id,
+                        'begin': ann.begin,
+                        'end': ann.end,
+                        'message': msg,
+                    })
             else:
                 invalid_count += 1
+                invalid_offset_details.append({
+                    'document_id': ann.document_id,
+                    'begin': ann.begin,
+                    'end': ann.end,
+                    'reason': msg,
+                })
                 print(f"  INVALID: {ann.document_id} [{ann.begin}:{ann.end}]: {msg}")
         
         self.validation_report = {
             'total_annotations': total_annotations,
             'docs_with_original_text': docs_with_text,
             'docs_referenced': docs_with_annotations,
-            'sample_size': len(sample_annotations),
-            'sample_valid': valid_count,
-            'sample_invalid': invalid_count,
-            'sample_text_mismatches': text_mismatch_count,
+            'validation_scope': 'FULL annotation set',
+            'validated_annotations': total_annotations,
+            'valid_offsets': valid_count,
+            'invalid_offsets': invalid_count,
+            'text_mismatches': text_mismatch_count,
+            'invalid_offset_details': invalid_offset_details,
+            'text_mismatch_details': text_mismatch_details,
             'synthetic_reconstruction_used': False,
         }
         
-        print(f"\nValidation Results (sample of {len(sample_annotations)}):")
+        print(f"\nValidation Results (FULL annotation set of {total_annotations}):")
         print(f"  Valid offsets: {valid_count}")
         print(f"  Invalid offsets: {invalid_count}")
         print(f"  Text mismatches: {text_mismatch_count}")
         
         if invalid_count > 0:
-            print(f"\nWARNING: Found {invalid_count} invalid annotations in sample")
+            print(f"\nWARNING: Found {invalid_count} invalid annotations in full set")
             print("Some annotations may have incorrect offsets in original documents")
         
         if text_mismatch_count > 0:
@@ -368,7 +393,10 @@ class Gap3Analyzer:
             
             if actors_i and actors_j:
                 same_actor = len(set(actors_i) & set(actors_j)) > 0
-                actor_transition = (actors_i[0], actors_j[0])
+                actor_transition = (
+                    passage_i.primary_actor(),
+                    passage_j.primary_actor(),
+                )
             else:
                 same_actor = None
                 actor_transition = None
@@ -379,7 +407,10 @@ class Gap3Analyzer:
             
             if types_i and types_j:
                 same_type = len(set(types_i) & set(types_j)) > 0
-                type_transition = (types_i[0], types_j[0])
+                type_transition = (
+                    passage_i.primary_argument_type(),
+                    passage_j.primary_argument_type(),
+                )
             else:
                 same_type = None
                 type_transition = None
@@ -875,8 +906,7 @@ def main():
     # Validate annotations against original documents
     validation_ok = analyzer.validate_annotations_and_documents(
         document_texts,
-        loader,
-        sample_size=50
+        loader
     )
     
     if not validation_ok:

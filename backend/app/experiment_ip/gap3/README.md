@@ -83,3 +83,4 @@ python test_passage_relationships.py
 - Effect sizes and confidence intervals are provided where appropriate
 - All limitations are explicitly stated
 - Experiment is reproducible with fixed random seed
+- Annotation offset validation covers the full RMU:ECHR annotation set; invalid offsets and text mismatches are reported separately.
