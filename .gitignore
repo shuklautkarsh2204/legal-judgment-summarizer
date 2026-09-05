@@ -38,3 +38,6 @@ uploads/
 data/raw/
 data/processed/
 .pdf
+
+# JSON files
+*.json
