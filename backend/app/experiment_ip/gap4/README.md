@@ -9,7 +9,7 @@ It is a separate experiment from Gap 3 and does not modify Gap 3 code or outputs
 From the project root:
 
 ```powershell
-& C:\WINDOWS\py.exe -3.13 backend/app/experiment_ip/gap4/experiment_1_coherence.py
+& .\.venv\Scripts\python.exe backend/app/experiment_ip/gap4/experiment_1_coherence.py
 ```
 
 The configured environment must have the dependencies in `requirements.txt`, including spaCy, sentence-transformers, SciPy, and matplotlib.

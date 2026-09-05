@@ -1,0 +1,1446 @@
+{
+  "metadata": {
+    "experiment": "Gap 4 Experiment 1 - Discourse Coherence Control Comparison",
+    "timestamp": "2026-09-03 18:41:36",
+    "random_seed": 42,
+    "permutations_per_document": 5,
+    "sentences_per_passage": 5,
+    "embedding_dimension": 384,
+    "coordinate_system": "Original RMU:ECHR document character offsets",
+    "synthetic_text_created": false,
+    "statistical_unit": "document-level aggregates for paired semantic comparison"
+  },
+  "validation": {
+    "original_order_checked": true,
+    "same_passages_after_shuffle_checked": true,
+    "no_passage_loss_or_duplication_checked": true,
+    "document_membership_preserved_checked": true,
+    "original_coordinates_preserved_checked": true,
+    "embedding_dimensions_checked": true,
+    "labels_attached_to_passages_checked": true,
+    "annotation_validation": {
+      "total_annotations": 15211,
+      "docs_with_original_text": 375,
+      "docs_referenced": 375,
+      "validation_scope": "FULL annotation set",
+      "validated_annotations": 15211,
+      "valid_offsets": 15211,
+      "invalid_offsets": 0,
+      "text_mismatches": 0,
+      "invalid_offset_details": [],
+      "text_mismatch_details": [],
+      "synthetic_reconstruction_used": false
+    }
+  },
+  "aggregate_statistics": {
+    "documents_used": 375,
+    "passages_used": 31822,
+    "original_adjacent_pairs": 31447,
+    "shuffled_sequences": 1875,
+    "original_semantic_continuity": {
+      "count": 31447,
+      "mean": 0.570991523120279,
+      "median": 0.585081160068512,
+      "std": 0.1456471221262111
+    },
+    "shuffled_semantic_continuity": {
+      "count": 157235,
+      "mean": 0.42029451939862345,
+      "median": 0.4189610183238983,
+      "std": 0.15939545606361943
+    },
+    "semantic_mean_difference": 0.15069700372165556,
+    "original_document_level_semantic_means": {
+      "count": 375,
+      "mean": 0.5659462457030673,
+      "median": 0.56668262463063,
+      "std": 0.03281771534319509
+    },
+    "shuffled_document_level_semantic_means": {
+      "count": 375,
+      "mean": 0.42346431647580796,
+      "median": 0.42452129123634413,
+      "std": 0.03736196557467873
+    },
+    "actor_continuity_original_document_means": {
+      "count": 375,
+      "mean": 0.854745109866286,
+      "median": 0.8695652173913043,
+      "std": 0.09394673378622213
+    },
+    "actor_continuity_shuffled_document_means": {
+      "count": 375,
+      "mean": 0.5968936613464226,
+      "median": 0.5869221858874105,
+      "std": 0.14910935060627042
+    },
+    "actor_continuity_mean_difference": 0.2578514485198634,
+    "statistical_comparison": {
+      "name": "Wilcoxon signed-rank test",
+      "unit": "document-level mean semantic continuity",
+      "n_documents": 375,
+      "statistic": 0.0,
+      "p_value": 3.323478632207074e-63
+    }
+  },
+  "original_argument_type_transitions": [
+    {
+      "from": "UNKNOWN",
+      "to": "UNKNOWN",
+      "count": 19334
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Subsumtion",
+      "count": 4390
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Subsumtion",
+      "count": 1337
+    },
+    {
+      "from": "Subsumtion",
+      "to": "UNKNOWN",
+      "count": 1245
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 1214
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 1017
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 397
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "UNKNOWN",
+      "count": 396
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 234
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 232
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "UNKNOWN",
+      "count": 220
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Subsumtion",
+      "count": 218
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Entscheidung des EGMR",
+      "count": 176
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "UNKNOWN",
+      "count": 167
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Subsumtion",
+      "count": 117
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 78
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "UNKNOWN",
+      "count": 76
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Entscheidung des EGMR",
+      "count": 75
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 64
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Subsumtion",
+      "count": 48
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 36
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Entscheidung des EGMR",
+      "count": 33
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 29
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 27
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 17
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 15
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 13
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 12
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Distinguishing",
+      "count": 11
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "count": 11
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 11
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Subsumtion",
+      "count": 11
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Entscheidung des EGMR",
+      "count": 10
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "UNKNOWN",
+      "count": 10
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 9
+    },
+    {
+      "from": "Konsens der prozessualen Parteien",
+      "to": "UNKNOWN",
+      "count": 8
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 8
+    },
+    {
+      "from": "Distinguishing",
+      "to": "Subsumtion",
+      "count": 7
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "UNKNOWN",
+      "count": 7
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 7
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 7
+    },
+    {
+      "from": "Distinguishing",
+      "to": "UNKNOWN",
+      "count": 6
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 6
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Entscheidung des EGMR",
+      "count": 6
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Distinguishing",
+      "count": 5
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 5
+    },
+    {
+      "from": "Sinn & Zweck Auslegung",
+      "to": "UNKNOWN",
+      "count": 4
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 4
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 4
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 4
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 4
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Entscheidung des EGMR",
+      "count": 4
+    },
+    {
+      "from": "Distinguishing",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 3
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "Subsumtion",
+      "count": 3
+    },
+    {
+      "from": "Konsens der prozessualen Parteien",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 3
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Sinn & Zweck Auslegung",
+      "count": 3
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 3
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Sinn & Zweck Auslegung",
+      "count": 3
+    },
+    {
+      "from": "Distinguishing",
+      "to": "Distinguishing",
+      "count": 2
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 2
+    },
+    {
+      "from": "Sinn & Zweck Auslegung",
+      "to": "Sinn & Zweck Auslegung",
+      "count": 2
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 2
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "count": 2
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Wortlaut Auslegung",
+      "count": 2
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "to": "UNKNOWN",
+      "count": 2
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 2
+    },
+    {
+      "from": "Wortlaut Auslegung",
+      "to": "UNKNOWN",
+      "count": 2
+    },
+    {
+      "from": "Wortlaut Auslegung",
+      "to": "Wortlaut Auslegung",
+      "count": 2
+    },
+    {
+      "from": "Distinguishing",
+      "to": "Entscheidung des EGMR",
+      "count": 1
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 1
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 1
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 1
+    },
+    {
+      "from": "Konsens der prozessualen Parteien",
+      "to": "Entscheidung des EGMR",
+      "count": 1
+    },
+    {
+      "from": "Konsens der prozessualen Parteien",
+      "to": "Subsumtion",
+      "count": 1
+    },
+    {
+      "from": "Konsens der prozessualen Parteien",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 1
+    },
+    {
+      "from": "Overruling",
+      "to": "Subsumtion",
+      "count": 1
+    },
+    {
+      "from": "Rechtsvergleichung",
+      "to": "Subsumtion",
+      "count": 1
+    },
+    {
+      "from": "Sinn & Zweck Auslegung",
+      "to": "Entscheidung des EGMR",
+      "count": 1
+    },
+    {
+      "from": "Sinn & Zweck Auslegung",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 1
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Overruling",
+      "count": 1
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Distinguishing",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "to": "Subsumtion",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Subsumtion",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 1
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 1
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Rechtsvergleichung",
+      "count": 1
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "count": 1
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 1
+    }
+  ],
+  "shuffled_argument_type_transitions": [
+    {
+      "from": "UNKNOWN",
+      "to": "UNKNOWN",
+      "count": 75148
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Subsumtion",
+      "count": 20093
+    },
+    {
+      "from": "Subsumtion",
+      "to": "UNKNOWN",
+      "count": 20030
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Subsumtion",
+      "count": 7117
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 5581
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "UNKNOWN",
+      "count": 5573
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "UNKNOWN",
+      "count": 5146
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 5049
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Subsumtion",
+      "count": 1674
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 1659
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Entscheidung des EGMR",
+      "count": 1054
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "UNKNOWN",
+      "count": 1034
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 1015
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 993
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Subsumtion",
+      "count": 914
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "UNKNOWN",
+      "count": 674
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 658
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 550
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 378
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 372
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Subsumtion",
+      "count": 289
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Entscheidung des EGMR",
+      "count": 284
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 122
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Subsumtion",
+      "count": 122
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 121
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "UNKNOWN",
+      "count": 119
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Entscheidung des EGMR",
+      "count": 81
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 77
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 77
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "UNKNOWN",
+      "count": 74
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 67
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Distinguishing",
+      "count": 63
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Entscheidung des EGMR",
+      "count": 63
+    },
+    {
+      "from": "Distinguishing",
+      "to": "UNKNOWN",
+      "count": 58
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "count": 55
+    },
+    {
+      "from": "Konsens der prozessualen Parteien",
+      "to": "UNKNOWN",
+      "count": 53
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "to": "UNKNOWN",
+      "count": 50
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 47
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 46
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 45
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 42
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 36
+    },
+    {
+      "from": "Sinn & Zweck Auslegung",
+      "to": "UNKNOWN",
+      "count": 35
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 34
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Sinn & Zweck Auslegung",
+      "count": 31
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 25
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Subsumtion",
+      "count": 25
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 23
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 21
+    },
+    {
+      "from": "Distinguishing",
+      "to": "Subsumtion",
+      "count": 19
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Entscheidung des EGMR",
+      "count": 17
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 17
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Wortlaut Auslegung",
+      "count": 17
+    },
+    {
+      "from": "Wortlaut Auslegung",
+      "to": "UNKNOWN",
+      "count": 16
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 13
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Distinguishing",
+      "count": 13
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "count": 12
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "to": "Subsumtion",
+      "count": 11
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "to": "Entscheidung des EGMR",
+      "count": 11
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "Subsumtion",
+      "count": 10
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 10
+    },
+    {
+      "from": "Distinguishing",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 9
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 9
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Distinguishing",
+      "count": 9
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 9
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 8
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 7
+    },
+    {
+      "from": "Konsens der prozessualen Parteien",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 7
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Sinn & Zweck Auslegung",
+      "count": 7
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Distinguishing",
+      "count": 7
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 7
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 7
+    },
+    {
+      "from": "Konsens der prozessualen Parteien",
+      "to": "Subsumtion",
+      "count": 6
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 6
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 5
+    },
+    {
+      "from": "Konsens der prozessualen Parteien",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 4
+    },
+    {
+      "from": "Overruling",
+      "to": "UNKNOWN",
+      "count": 4
+    },
+    {
+      "from": "Rechtsvergleichung",
+      "to": "UNKNOWN",
+      "count": 4
+    },
+    {
+      "from": "Sinn & Zweck Auslegung",
+      "to": "Subsumtion",
+      "count": 4
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Overruling",
+      "count": 4
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Rechtsgrundlage",
+      "count": 4
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "count": 4
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Wortlaut Auslegung",
+      "count": 3
+    },
+    {
+      "from": "Wortlaut Auslegung",
+      "to": "Subsumtion",
+      "count": 3
+    },
+    {
+      "from": "Distinguishing",
+      "to": "Entscheidung des EGMR",
+      "count": 2
+    },
+    {
+      "from": "Distinguishing",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 2
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Rechtsvergleichung",
+      "count": 2
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "count": 2
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 2
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 2
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Rechtsvergleichung",
+      "count": 2
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Sinn & Zweck Auslegung",
+      "count": 2
+    },
+    {
+      "from": "Distinguishing",
+      "to": "Distinguishing",
+      "count": 1
+    },
+    {
+      "from": "Distinguishing",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 1
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 1
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 1
+    },
+    {
+      "from": "Einsch\u00e4tzungsspielraum",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 1
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Distinguishing",
+      "count": 1
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Konsens der prozessualen Parteien",
+      "count": 1
+    },
+    {
+      "from": "Entscheidung des EGMR",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "count": 1
+    },
+    {
+      "from": "Overruling",
+      "to": "Subsumtion",
+      "count": 1
+    },
+    {
+      "from": "Rechtsvergleichung",
+      "to": "Subsumtion",
+      "count": 1
+    },
+    {
+      "from": "Sinn & Zweck Auslegung",
+      "to": "Vorherige Rechtsprechung des EGMR",
+      "count": 1
+    },
+    {
+      "from": "Subsumtion",
+      "to": "Rechtsvergleichung",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Geeignetheit",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Distinguishing",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Einsch\u00e4tzungsspielraum",
+      "count": 1
+    },
+    {
+      "from": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Legitimer Zweck",
+      "to": "Entscheidung des EGMR",
+      "count": 1
+    },
+    {
+      "from": "Vorherige Rechtsprechung des EGMR",
+      "to": "Overruling",
+      "count": 1
+    },
+    {
+      "from": "Wortlaut Auslegung",
+      "to": "Verh\u00e4ltnism\u00e4\u00dfigkeitspr\u00fcfung \u2013 Angemessenheit",
+      "count": 1
+    }
+  ],
+  "original_actor_transitions": [
+    {
+      "from": "UNKNOWN",
+      "to": "UNKNOWN",
+      "count": 18772
+    },
+    {
+      "from": "EGMR",
+      "to": "EGMR",
+      "count": 6544
+    },
+    {
+      "from": "Staat",
+      "to": "Staat",
+      "count": 894
+    },
+    {
+      "from": "EGMR",
+      "to": "UNKNOWN",
+      "count": 882
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "EGMR",
+      "count": 853
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 719
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 467
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "UNKNOWN",
+      "count": 368
+    },
+    {
+      "from": "EGMR",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 305
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "Staat",
+      "count": 289
+    },
+    {
+      "from": "Staat",
+      "to": "UNKNOWN",
+      "count": 285
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Staat",
+      "count": 217
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "EGMR",
+      "count": 202
+    },
+    {
+      "from": "Staat",
+      "to": "EGMR",
+      "count": 189
+    },
+    {
+      "from": "Staat",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 95
+    },
+    {
+      "from": "Dritte",
+      "to": "Dritte",
+      "count": 86
+    },
+    {
+      "from": "EGMR",
+      "to": "Staat",
+      "count": 81
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "Kommission/Kammer",
+      "count": 27
+    },
+    {
+      "from": "Dritte",
+      "to": "EGMR",
+      "count": 26
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Kommission/Kammer",
+      "count": 22
+    },
+    {
+      "from": "Dritte",
+      "to": "UNKNOWN",
+      "count": 20
+    },
+    {
+      "from": "Staat",
+      "to": "Dritte",
+      "count": 20
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "UNKNOWN",
+      "count": 17
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Dritte",
+      "count": 16
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "Dritte",
+      "count": 10
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 10
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "Kommission/Kammer",
+      "count": 8
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "EGMR",
+      "count": 8
+    },
+    {
+      "from": "EGMR",
+      "to": "Kommission/Kammer",
+      "count": 7
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "Staat",
+      "count": 5
+    },
+    {
+      "from": "Staat",
+      "to": "Kommission/Kammer",
+      "count": 3
+    }
+  ],
+  "shuffled_actor_transitions": [
+    {
+      "from": "UNKNOWN",
+      "to": "UNKNOWN",
+      "count": 68161
+    },
+    {
+      "from": "EGMR",
+      "to": "UNKNOWN",
+      "count": 24244
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "EGMR",
+      "count": 24124
+    },
+    {
+      "from": "EGMR",
+      "to": "EGMR",
+      "count": 10280
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 4951
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "UNKNOWN",
+      "count": 4851
+    },
+    {
+      "from": "Staat",
+      "to": "UNKNOWN",
+      "count": 4555
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Staat",
+      "count": 4526
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "EGMR",
+      "count": 2058
+    },
+    {
+      "from": "EGMR",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 2028
+    },
+    {
+      "from": "Staat",
+      "to": "EGMR",
+      "count": 1911
+    },
+    {
+      "from": "EGMR",
+      "to": "Staat",
+      "count": 1863
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "Staat",
+      "count": 478
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 425
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Dritte",
+      "count": 424
+    },
+    {
+      "from": "Staat",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 421
+    },
+    {
+      "from": "Dritte",
+      "to": "UNKNOWN",
+      "count": 413
+    },
+    {
+      "from": "Staat",
+      "to": "Staat",
+      "count": 412
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "Kommission/Kammer",
+      "count": 225
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "UNKNOWN",
+      "count": 216
+    },
+    {
+      "from": "EGMR",
+      "to": "Dritte",
+      "count": 149
+    },
+    {
+      "from": "Dritte",
+      "to": "EGMR",
+      "count": 148
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "EGMR",
+      "count": 73
+    },
+    {
+      "from": "EGMR",
+      "to": "Kommission/Kammer",
+      "count": 72
+    },
+    {
+      "from": "Dritte",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 38
+    },
+    {
+      "from": "Dritte",
+      "to": "Staat",
+      "count": 36
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "Dritte",
+      "count": 28
+    },
+    {
+      "from": "Staat",
+      "to": "Dritte",
+      "count": 28
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "Beschwerdef\u00fchrer",
+      "count": 20
+    },
+    {
+      "from": "Dritte",
+      "to": "Dritte",
+      "count": 19
+    },
+    {
+      "from": "Beschwerdef\u00fchrer",
+      "to": "Kommission/Kammer",
+      "count": 18
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "Staat",
+      "count": 16
+    },
+    {
+      "from": "Staat",
+      "to": "Kommission/Kammer",
+      "count": 13
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "Dritte",
+      "count": 5
+    },
+    {
+      "from": "Dritte",
+      "to": "Kommission/Kammer",
+      "count": 3
+    },
+    {
+      "from": "Kommission/Kammer",
+      "to": "Kommission/Kammer",
+      "count": 3
+    }
+  ],
+  "limitations": [
+    "This experiment measures continuity signals, not legal correctness or full coherence.",
+    "RMU:ECHR labels are related-domain legal-functional annotations, not Indian Supreme Court relationship gold labels.",
+    "Random permutations are a control condition, not necessarily legally incorrect reasoning.",
+    "Passage-level observations are summarized by document for semantic inference; transition counts remain descriptive.",
+    "No trained coherence classifier, tuned threshold, or invented gold label is used."
+  ]
+}

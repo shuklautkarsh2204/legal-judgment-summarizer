@@ -30,9 +30,9 @@ from dataclasses import dataclass, asdict
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from backend.app.services.passage_builder import PassageBuilder
 from backend.app.services.semantic_analyzer import SemanticAnalyzer
 from backend.app.services.preprocessing import split_into_sentences
+from backend.app.services.passage_builder import PassageBuilder
 from backend.app.experiment_ip.gap3.document_loader import DocumentLoader
 
 # Set random seed for reproducibility
@@ -134,6 +134,7 @@ class Gap3Analyzer:
         self.semantic_analyzer = SemanticAnalyzer()
         
         self.annotations: List[Annotation] = []
+        self.annotations_by_doc = defaultdict(list)
         self.passages_by_doc: Dict[str, List[PassageInfo]] = defaultdict(list)
         self.pairs: List[PassagePair] = []
         
@@ -264,6 +265,9 @@ class Gap3Analyzer:
             )
             for r in data
         ]
+        self.annotations_by_doc = defaultdict(list)
+        for annotation in self.annotations:
+            self.annotations_by_doc[annotation.document_id].append(annotation)
         
         print(f"Loaded {len(self.annotations)} annotations")
         
@@ -287,25 +291,38 @@ class Gap3Analyzer:
         """
         print(f"\nBuilding passages for {len(document_texts)} documents...")
         
-        for doc_id, text in document_texts.items():
+        total_documents = len(document_texts)
+        for document_index, (doc_id, text) in enumerate(document_texts.items(), start=1):
+            document_start = time.perf_counter()
             if not text or not text.strip():
+                print(
+                    f"[{document_index}/{total_documents}] {doc_id} | passages: 0 "
+                    f"| encoding_time: 0.00s | total_time: {time.perf_counter() - document_start:.2f}s"
+                )
                 continue
             
             # Build passages
+            construction_start = time.perf_counter()
             passages = self.passage_builder.build_passages(text, document_id=doc_id)
+            construction_time = time.perf_counter() - construction_start
             
             # Encode passages
+            encoding_start = time.perf_counter()
             encoding_result = self.semantic_analyzer.encode_passages(passages, batch_size=32)
             encoded_passages = encoding_result['passages']
+            encoding_time = time.perf_counter() - encoding_start
             
             # Create PassageInfo objects with annotation overlaps
+            overlap_start = time.perf_counter()
+            document_annotations = self.annotations_by_doc.get(doc_id, [])
             for i, passage in enumerate(encoded_passages):
                 # Find overlapping annotations
                 overlapping = [
-                    a for a in self.annotations
-                    if a.document_id == doc_id
-                    and not (a.end <= passage['original_position']['start_char']
-                            or a.begin >= passage['original_position']['end_char'])
+                    annotation for annotation in document_annotations
+                    if not (
+                        annotation.end <= passage['original_position']['start_char']
+                        or annotation.begin >= passage['original_position']['end_char']
+                    )
                 ]
                 
                 passage_info = PassageInfo(
@@ -319,6 +336,13 @@ class Gap3Analyzer:
                 )
                 
                 self.passages_by_doc[doc_id].append(passage_info)
+            overlap_time = time.perf_counter() - overlap_start
+            total_time = time.perf_counter() - document_start
+            print(
+                f"[{document_index}/{total_documents}] {doc_id} | passages: {len(encoded_passages)} "
+                f"| construction_time: {construction_time:.2f}s | encoding_time: {encoding_time:.2f}s "
+                f"| overlap_time: {overlap_time:.2f}s | total_time: {total_time:.2f}s"
+            )
         
         total_passages = sum(len(p) for p in self.passages_by_doc.values())
         docs_with_passages = len(self.passages_by_doc)

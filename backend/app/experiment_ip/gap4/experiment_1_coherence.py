@@ -31,6 +31,7 @@ RANDOM_SEED = 42
 PERMUTATIONS_PER_DOCUMENT = 5
 MIN_PASSAGES_PER_DOCUMENT = 2
 EMBEDDING_DIMENSION = 384
+MAX_SHUFFLE_ATTEMPTS = 10
 
 
 def cosine_similarity(first, second):
@@ -223,7 +224,9 @@ def main():
     raw_sequences = []
     rng = random.Random(RANDOM_SEED)
 
-    for document_id, passages in eligible.items():
+    print("Starting original-vs-shuffled sequence analysis...")
+    total_documents = len(eligible)
+    for document_index, (document_id, passages) in enumerate(eligible.items(), start=1):
         expected_indices = list(range(len(passages)))
         actual_indices = [passage.passage_index for passage in passages]
         if actual_indices != expected_indices:
@@ -242,7 +245,12 @@ def main():
         shuffled_records = []
         for permutation_index in range(PERMUTATIONS_PER_DOCUMENT):
             shuffled = list(passages)
-            rng.shuffle(shuffled)
+            for _ in range(MAX_SHUFFLE_ATTEMPTS):
+                rng.shuffle(shuffled)
+                if [passage.passage_index for passage in shuffled] != expected_indices:
+                    break
+            else:
+                shuffled[0], shuffled[1] = shuffled[1], shuffled[0]
             validate_sequence(passages, shuffled, document_id)
             metrics = sequence_metrics(shuffled)
             all_shuffled_scores.extend(metrics["semantic_scores"])
@@ -274,6 +282,10 @@ def main():
             "passage_indices": expected_indices,
             "shuffled_sequences": shuffled_records,
         })
+        if document_index % 25 == 0 or document_index == total_documents:
+            print(
+                f"Gap 4 progress: {document_index}/{total_documents} documents processed"
+            )
 
     paired_original = [row["original_mean"] for row in document_means]
     paired_shuffled = [row["shuffled_mean"] for row in document_means]

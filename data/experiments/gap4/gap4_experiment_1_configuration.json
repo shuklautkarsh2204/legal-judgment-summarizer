@@ -1,0 +1,11 @@
+{
+  "experiment": "Gap 4 Experiment 1 - Discourse Coherence Control Comparison",
+  "timestamp": "2026-09-03 18:41:36",
+  "random_seed": 42,
+  "permutations_per_document": 5,
+  "sentences_per_passage": 5,
+  "embedding_dimension": 384,
+  "coordinate_system": "Original RMU:ECHR document character offsets",
+  "synthetic_text_created": false,
+  "statistical_unit": "document-level aggregates for paired semantic comparison"
+}
