@@ -37,7 +37,10 @@ htmlcov/
 uploads/
 data/raw/
 data/processed/
-.pdf
-
-# JSON files
-*.json
+models/
+data/predictions/
+data/embeddings/
+data/intermediate/
+*.joblib
+*.safetensors
+*.pt

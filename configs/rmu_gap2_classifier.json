@@ -1,0 +1,16 @@
+{
+  "dataset": "data/experiments/gap2/rmu_echr_annotations.json",
+  "model_name": "all-MiniLM-L6-v2",
+  "major_labels": [
+    "Subsumtion",
+    "Vorherige Rechtsprechung des EGMR",
+    "Verhältnismäßigkeitsprüfung – Angemessenheit",
+    "Entscheidung des EGMR"
+  ],
+  "samples_per_label": 1000,
+  "test_size": 0.2,
+  "random_state": 42,
+  "classifier": "sklearn.linear_model.LogisticRegression",
+  "max_iter": 2000,
+  "inference_artifact": "models/rmu_gap2_classifier.joblib"
+}

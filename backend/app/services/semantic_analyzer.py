@@ -1,19 +1,61 @@
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+from collections import OrderedDict
+from functools import lru_cache
+from threading import RLock
 import time
 import numpy as np
+
+
+_EMBEDDING_CACHE = OrderedDict()
+_EMBEDDING_CACHE_LOCK = RLock()
+_EMBEDDING_CACHE_LIMIT = 8192
+
+
+@lru_cache(maxsize=1)
+def _load_embedding_model(model_name):
+    return SentenceTransformer(model_name)
+
 
 class SemanticAnalyzer:
     
     def __init__(self):
-        self.model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")  # Load a pre-trained model for semantic analysis
+        self.model = _load_embedding_model("sentence-transformers/all-MiniLM-L6-v2")
         self.embedding_dimension = 384  # all-MiniLM-L6-v2 produces 384-dim embeddings
     
     def encode(self, texts):
-        return self.model.encode(
-            texts,
-            convert_to_numpy = True
-        )
+        texts = list(texts)
+        if not texts:
+            return np.empty((0, self.embedding_dimension), dtype=np.float32)
+
+        output = [None] * len(texts)
+        missing_indices = {}
+        with _EMBEDDING_CACHE_LOCK:
+            for index, text in enumerate(texts):
+                cached = _EMBEDDING_CACHE.get(text)
+                if cached is not None:
+                    _EMBEDDING_CACHE.move_to_end(text)
+                    output[index] = cached
+                else:
+                    missing_indices.setdefault(text, []).append(index)
+
+        missing_texts = list(missing_indices)
+        if missing_texts:
+            computed = np.asarray(self.model.encode(
+                missing_texts,
+                convert_to_numpy=True,
+            ))
+            with _EMBEDDING_CACHE_LOCK:
+                for text, embedding in zip(missing_texts, computed):
+                    embedding = np.asarray(embedding, dtype=np.float32)
+                    _EMBEDDING_CACHE[text] = embedding
+                    _EMBEDDING_CACHE.move_to_end(text)
+                    while len(_EMBEDDING_CACHE) > _EMBEDDING_CACHE_LIMIT:
+                        _EMBEDDING_CACHE.popitem(last=False)
+                    for index in missing_indices[text]:
+                        output[index] = embedding
+
+        return np.asarray(output)
     
     def encode_passages(self, passages, batch_size=32):
         """
