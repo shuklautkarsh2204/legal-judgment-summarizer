@@ -109,16 +109,29 @@ def extract_pdf(pdf_path: Path, *, ocr_dpi=None, ocr_language=None) -> dict:
                 "text": page_text,
             })
 
-    text = "\n".join(
-        f"--- Page {page['page_number']} [{page['extraction_method']}] ---\n{page['text']}"
-        for page in pages
-    )
+    text_parts = []
+    character_offset = 0
+    for page in pages:
+        page_header = (
+            f"--- Page {page['page_number']} [{page['extraction_method']}] ---\n"
+        )
+        text_parts.append(page_header)
+        character_offset += len(page_header)
+        page["start_char"] = character_offset
+        text_parts.append(page["text"])
+        character_offset += len(page["text"])
+        page["end_char"] = character_offset
+        text_parts.append("\n")
+        character_offset += 1
+    text = "".join(text_parts)
     methods = sorted({page["extraction_method"] for page in pages})
     page_metadata = [
         {
             "page_number": page["page_number"],
             "extraction_method": page["extraction_method"],
             "character_count": page["character_count"],
+            "start_char": page["start_char"],
+            "end_char": page["end_char"],
         }
         for page in pages
     ]

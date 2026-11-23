@@ -10,6 +10,13 @@ from functools import lru_cache
 
 import numpy as np
 
+from backend.app.services.evidence_verification import (
+    RoleAwareEvidenceOrganizer,
+    build_structured_summary,
+    retain_role_verified_claims,
+    verify_summary_claims,
+)
+
 
 _STOPWORDS = {
     "a", "an", "and", "are", "as", "at", "be", "been", "being", "but",
@@ -28,7 +35,11 @@ logger = logging.getLogger("legal_judgment_summarizer.summarization")
 _GENERATION_INSTRUCTION = (
     "Summarize only statements supported by the source. Do not add facts, arguments, "
     "citations, statutory provisions, dates, or holdings. Preserve party positions "
-    "and legal outcomes only when explicitly stated.\nSOURCE PASSAGES:\n"
+    "and legal outcomes only when explicitly stated. Keep party submissions attributed "
+    "to that party; a party submission alone cannot establish what the Court held or "
+    "ordered. Treat uncertain role tags as uncertain, and do not infer missing roles."
+    " Use clear plain language for a non-lawyer without changing legal meaning."
+    "\nSOURCE PASSAGES:\n"
 )
 _COHERENCE_RANDOM_SEED = 42
 _COHERENCE_PERMUTATIONS = 5
@@ -52,39 +63,179 @@ def _sentences(text):
 def _source_reference(passage):
     position = passage["original_position"]
     return {
+        "source_document_id": passage["document_id"],
         "passage_id": passage["passage_id"],
         "start_char": position["start_char"],
         "end_char": position["end_char"],
+        "page_numbers": passage.get("page_numbers") or None,
+        "paragraph_reference": None,
+        "bounding_boxes": None,
     }
 
 
 def _select_passage_groups(passages):
     windows = [passages[start:start + 4] for start in range(0, len(passages), 4)]
-    if len(windows) <= 6:
-        return windows
+    scores = {}
 
     target_passages = min(len(passages), min(96, max(24, math.ceil(len(passages) * 0.18))))
     target_windows = max(1, math.ceil(target_passages / 4))
 
     def window_score(window_index):
+        if window_index in scores:
+            return scores[window_index]
         window = windows[window_index]
         text = " ".join(passage["text"].lower() for passage in window)
         marker_score = sum(marker in text for marker in _LEGAL_MARKERS)
         boundary_score = 1.5 if window_index == 0 or window_index == len(windows) - 1 else 0
-        return marker_score + boundary_score
+        scores[window_index] = marker_score + boundary_score
+        return scores[window_index]
 
-    ranked = sorted(range(len(windows)), key=lambda index: (-window_score(index), index))
-    selected = []
-    used_passages = 0
-    for window_index in ranked:
-        if any(abs(window_index - chosen) <= 1 for chosen in selected):
-            continue
-        selected.append(window_index)
-        used_passages += len(windows[window_index])
-        if used_passages >= target_passages or len(selected) >= target_windows:
-            break
+    if len(windows) <= 6:
+        selected = list(range(len(windows)))
+    else:
+        ranked = sorted(range(len(windows)), key=lambda index: (-window_score(index), index))
+        selected = []
+        used_passages = 0
+        for window_index in ranked:
+            if any(abs(window_index - chosen) <= 1 for chosen in selected):
+                continue
+            selected.append(window_index)
+            used_passages += len(windows[window_index])
+            if used_passages >= target_passages or len(selected) >= target_windows:
+                break
 
-    return [windows[index] for index in sorted(selected)]
+    selected = sorted(selected)
+    selected_ids = {
+        passage["passage_id"] for index in selected for passage in windows[index]
+    }
+    return [windows[index] for index in selected], {
+        "policy": (
+            "All windows when there are at most six; otherwise rank by legal-marker "
+            "matches and first/last-window bonuses, avoid adjacent windows, and cap "
+            "selection at the existing target budget."
+        ),
+        "selected_window_indices": selected,
+        "selected_passage_ids": sorted(selected_ids),
+        "omitted_passage_ids": [
+            passage["passage_id"] for passage in passages
+            if passage["passage_id"] not in selected_ids
+        ],
+        "windows": [
+            {
+                "window_index": index,
+                "passage_ids": [passage["passage_id"] for passage in window],
+                "score": round(window_score(index), 4),
+                "selected": index in selected,
+                "omission_reason": (
+                    None if index in selected else
+                    "selection_budget_or_adjacent_window_constraint"
+                ),
+            }
+            for index, window in enumerate(windows)
+        ],
+    }
+
+
+def _tokenizer_input_limit(generator):
+    tokenizer = getattr(generator, "tokenizer", None)
+    candidates = []
+    model = getattr(generator, "model", None)
+    config = getattr(model, "config", None)
+    model_limit = getattr(config, "max_position_embeddings", None)
+    if isinstance(model_limit, int) and model_limit > 0:
+        candidates.append(model_limit)
+    tokenizer_limit = getattr(tokenizer, "model_max_length", None)
+    if isinstance(tokenizer_limit, int) and 0 < tokenizer_limit < 1_000_000:
+        candidates.append(tokenizer_limit)
+    return min(candidates) if candidates else None
+
+
+def _count_tokens(tokenizer, text):
+    encoded = tokenizer.encode(text, add_special_tokens=True)
+    return len(encoded)
+
+
+def _split_long_fragment(fragment, tokenizer, input_limit):
+    if _count_tokens(tokenizer, _GENERATION_INSTRUCTION + fragment) <= input_limit:
+        return [fragment]
+
+    sentences = _sentences(fragment)
+    if len(sentences) > 1:
+        return [
+            piece
+            for sentence in sentences
+            for piece in _split_long_fragment(sentence, tokenizer, input_limit)
+        ]
+
+    words = re.findall(r"\S+\s*", fragment)
+    if len(words) > 1:
+        pieces = []
+        current = ""
+        for word in words:
+            candidate = current + word
+            if current and _count_tokens(
+                tokenizer, _GENERATION_INSTRUCTION + candidate
+            ) > input_limit:
+                pieces.append(current)
+                current = word
+            else:
+                current = candidate
+        if current:
+            pieces.append(current)
+        if all(
+            _count_tokens(tokenizer, _GENERATION_INSTRUCTION + piece) <= input_limit
+            for piece in pieces
+        ):
+            return pieces
+
+    raise ValueError(
+        "A source fragment exceeds the summarization model input limit and cannot "
+        "be split safely."
+    )
+
+
+def _split_source_to_fit(source_text, tokenizer, input_limit):
+    if _count_tokens(tokenizer, _GENERATION_INSTRUCTION + source_text) <= input_limit:
+        return [source_text]
+
+    fragments = [
+        fragment for fragment in re.split(r"(?<=[.!?])\s+|\n+", source_text)
+        if fragment
+    ]
+    if not fragments:
+        return [source_text]
+
+    chunks = []
+    current = ""
+    for fragment in fragments:
+        fragment_pieces = _split_long_fragment(fragment, tokenizer, input_limit)
+        for piece in fragment_pieces:
+            candidate = f"{current}\n{piece}" if current else piece
+            if current and _count_tokens(
+                tokenizer, _GENERATION_INSTRUCTION + candidate
+            ) > input_limit:
+                chunks.append(current)
+                current = piece
+            else:
+                current = candidate
+    if current:
+        chunks.append(current)
+    return chunks
+
+
+def _attach_page_references(passages, extraction_metadata):
+    pages = extraction_metadata.get("pages", []) if extraction_metadata else []
+    for passage in passages:
+        position = passage["original_position"]
+        passage["page_numbers"] = [
+            page["page_number"] for page in pages
+            if (
+                isinstance(page.get("start_char"), int)
+                and isinstance(page.get("end_char"), int)
+                and page["start_char"] < position["end_char"]
+                and page["end_char"] > position["start_char"]
+            )
+        ] or None
 
 
 def _ground_generated_claims(text, source_text):
@@ -125,6 +276,12 @@ class HierarchicalSummarizer:
         self._generator = generator
         self.embedding_analyzer = embedding_analyzer or SemanticAnalyzer()
         self.passage_builder = PassageBuilder(sentences_per_passage=5)
+        self.evidence_organizer = RoleAwareEvidenceOrganizer()
+        self._generation_stats = {
+            "input_token_limit": None,
+            "generation_chunk_count": 0,
+            "truncation_enabled": False,
+        }
 
     @property
     def generator(self):
@@ -134,19 +291,36 @@ class HierarchicalSummarizer:
         return self._generator
 
     def _generate(self, source_text):
-        result = self.generator(
-            _GENERATION_INSTRUCTION + source_text,
-            max_length=220,
-            min_length=20,
-            do_sample=False,
-            no_repeat_ngram_size=3,
-            truncation=True,
+        tokenizer = getattr(self.generator, "tokenizer", None)
+        input_limit = _tokenizer_input_limit(self.generator)
+        self._generation_stats["input_token_limit"] = input_limit
+        chunks = (
+            _split_source_to_fit(source_text, tokenizer, input_limit)
+            if tokenizer is not None and input_limit is not None
+            else [source_text]
         )
-        return result[0]["summary_text"].strip()
+        summaries = []
+        for chunk in chunks:
+            result = self.generator(
+                _GENERATION_INSTRUCTION + chunk,
+                max_length=220,
+                min_length=20,
+                do_sample=False,
+                no_repeat_ngram_size=3,
+                truncation=False,
+            )
+            summaries.append(result[0]["summary_text"].strip())
+            self._generation_stats["generation_chunk_count"] += 1
+        return " ".join(summary for summary in summaries if summary)
 
     def summarize(self, text, document_id="uploaded-judgment", extraction_metadata=None):
         from backend.app.services.rmu_classifier import predict_transferred_functions
 
+        self._generation_stats = {
+            "input_token_limit": None,
+            "generation_chunk_count": 0,
+            "truncation_enabled": False,
+        }
         passages = self.passage_builder.build_passages(text, document_id=document_id)
         if not passages:
             raise ValueError("No passages could be built from the extracted document text.")
@@ -154,17 +328,24 @@ class HierarchicalSummarizer:
         encoded = self.embedding_analyzer.encode_passages(passages, batch_size=32)
         passages = encoded["passages"]
         logger.info("Built %d source passages for %s", len(passages), document_id)
-        group_sources = _select_passage_groups(passages)
+        _attach_page_references(passages, extraction_metadata or {})
+
+        transfer_result = predict_transferred_functions(
+            passages,
+            self.embedding_analyzer,
+        )
+        transferred_labels = {
+            item["passage_id"]: item["prediction"]
+            for item in transfer_result["items"]
+        } if transfer_result else {}
+        passages = self.evidence_organizer.organize(passages, transferred_labels)
+        group_sources, selection_audit = _select_passage_groups(passages)
         selected_passages = [passage for group in group_sources for passage in group]
         logger.info(
             "Selected %d passages in %d source groups for %s",
             len(selected_passages), len(group_sources), document_id,
         )
 
-        transfer_result = predict_transferred_functions(
-            passages,
-            self.embedding_analyzer,
-        )
         predictions_by_id = {}
         if transfer_result:
             predictions_by_id = {
@@ -180,15 +361,24 @@ class HierarchicalSummarizer:
         for group_index, group in enumerate(group_sources):
             group_text = "\n".join(passage["text"] for passage in group)
             references = [_source_reference(passage) for passage in group]
-            candidate = self._generate(group_text)
+            candidate = self._generate(
+                self.evidence_organizer.format_for_generation(group)
+            )
+            candidate_verification = verify_summary_claims(candidate, group)
             grounded, unsupported = _ground_generated_claims(candidate, group_text)
             unsupported_claims.extend(unsupported)
+            source_roles = sorted({
+                passage["evidence_role"] for passage in group
+            })
             item = {
                 "level": 1,
                 "group_index": group_index,
                 "summary": grounded,
                 "source_references": references,
+                "source_roles": source_roles,
+                "claim_verification": candidate_verification,
                 "_source_text": group_text,
+                "_source_passages": group,
             }
             intermediate.append(item)
             generation_trace.append({key: value for key, value in item.items() if not key.startswith("_")})
@@ -206,15 +396,22 @@ class HierarchicalSummarizer:
             for start in range(0, len(current_level), 4):
                 children = current_level[start:start + 4]
                 child_text = "\n".join(
-                    f"Sources {child['source_references']}: {child['summary']}"
+                    f"Sources {child['source_references']}; "
+                    f"evidence roles {child['source_roles']}: {child['summary']}"
                     for child in children if child["summary"]
                 )
                 source_text = "\n".join(child["_source_text"] for child in children)
+                source_passages = [
+                    passage for child in children for passage in child["_source_passages"]
+                ]
                 references = [
                     reference for child in children
                     for reference in child["source_references"]
                 ]
                 candidate = self._generate(child_text) if child_text else ""
+                candidate_verification = verify_summary_claims(
+                    candidate, source_passages
+                )
                 grounded, unsupported = _ground_generated_claims(candidate, source_text)
                 unsupported_claims.extend(unsupported)
                 item = {
@@ -222,7 +419,12 @@ class HierarchicalSummarizer:
                     "group_index": len(next_level),
                     "summary": grounded,
                     "source_references": references,
+                    "source_roles": sorted({
+                        role for child in children for role in child["source_roles"]
+                    }),
+                    "claim_verification": candidate_verification,
                     "_source_text": source_text,
+                    "_source_passages": source_passages,
                 }
                 next_level.append(item)
                 generation_trace.append({key: value for key, value in item.items() if not key.startswith("_")})
@@ -230,13 +432,23 @@ class HierarchicalSummarizer:
             generation_level += 1
 
         final_input = "\n".join(
-            f"Source references {item['source_references']}: {item['summary']}"
+            f"Source references {item['source_references']}; "
+            f"evidence roles {item['source_roles']}: {item['summary']}"
             for item in current_level if item["summary"]
         )
         final_source = "\n".join(item["_source_text"] for item in current_level)
         candidate = self._generate(final_input) if final_input else ""
-        final_summary, final_unsupported = _ground_generated_claims(candidate, final_source)
+        claim_verification = verify_summary_claims(candidate, selected_passages)
+        lexically_grounded_summary, final_unsupported = _ground_generated_claims(
+            candidate, final_source
+        )
         unsupported_claims.extend(final_unsupported)
+        lexical_claim_verification = verify_summary_claims(
+            lexically_grounded_summary, selected_passages
+        )
+        final_summary, role_withheld_claims = retain_role_verified_claims(
+            lexically_grounded_summary, lexical_claim_verification
+        )
         final_references = [
             reference for item in current_level
             for reference in item["source_references"]
@@ -244,12 +456,21 @@ class HierarchicalSummarizer:
         generation_trace.append({
             "level": generation_level,
             "group_index": 0,
-            "summary": final_summary,
+            "summary": lexically_grounded_summary,
+            "returned_summary": final_summary,
             "source_references": final_references,
+            "claim_verification": claim_verification,
         })
+        returned_summary_verification = verify_summary_claims(
+            final_summary, selected_passages
+        )
+        structured_summary = build_structured_summary(returned_summary_verification)
 
         if not final_summary:
-            final_summary = "No generated claims passed the automatic source-grounding checks."
+            final_summary = (
+                "No generated claims passed the exploratory source and role checks. "
+                "Review the original judgment."
+            )
         logger.info(
             "Completed %s with %d selected passages and %d flagged claims",
             document_id, len(selected_passages), len(unsupported_claims),
@@ -348,10 +569,38 @@ class HierarchicalSummarizer:
                 "passage_count": len(passages),
                 "selected_passage_count": len(selected_passages),
                 "selected_passage_indices": sorted(selected_ids),
+                "passage_selection": selection_audit,
                 "source_references": [
                     _source_reference(passage) for passage in selected_passages
                 ],
+                "role_evidence_inventory": {
+                    "method": "Explicit textual cue heuristic; ambiguous content remains unclassified.",
+                    "counts": dict(Counter(
+                        passage["evidence_role"] for passage in passages
+                    )),
+                    "transferred_label_mappings": [
+                        {
+                            "passage_id": passage["passage_id"],
+                            **passage["transferred_function_mapping"],
+                        }
+                        for passage in selected_passages
+                        if passage["transferred_function_mapping"] is not None
+                    ],
+                    "transferred_mapping_use": (
+                        "Approximate cross-domain functional analogy only; not used "
+                        "to infer speaker, assign evidence roles, or represent Indian "
+                        "ground truth."
+                    ),
+                },
+                "structured_summary": structured_summary,
+                "claim_verification": claim_verification,
+                "returned_summary_claim_verification": returned_summary_verification,
+                "role_attribution_filter": {
+                    "method": "Only claims marked supported_by_identified_evidence are returned.",
+                    "withheld_claims": role_withheld_claims,
+                },
                 "generation_trace": generation_trace,
+                "generation_input": dict(self._generation_stats),
                 "content_coverage_fraction": round(
                     min(selected_characters / total_characters, 1.0), 4
                 ),
@@ -402,7 +651,7 @@ class HierarchicalSummarizer:
                     "status": "Exploratory; this comparison is not validated on Indian judgments.",
                 },
                 "grounding": {
-                    "method": "Lexical source overlap and identifier-presence checks; not entailment verification.",
+                    "method": "Lexical source-overlap and identifier-presence heuristics; not entailment verification.",
                     "unsupported_claim_count": len(unsupported_claims),
                     "unsupported_claims": unsupported_claims,
                     "limitations": [

@@ -38,9 +38,9 @@ Experiment details and source outputs are in [`backend/app/experiment_ip/`](back
 
 The repository includes an exploratory transfer test on `Vijay_Madanlal_Choudhary_vs_Union_Of_India_on_27_July_2022`. It applies a classifier trained on RMU:ECHR labels to passages from that Indian judgment. This single-document transfer test is not evidence of generalization to Indian judgments: it has no Indian gold labels and does not establish prediction correctness.
 
-### Current Indian dataset direction: LegalSeg
+### Indian role-label dataset direction: paused pending access
 
-The research focus is shifting to Indian legal judgments. The selected resource is [L-NLProc/LegalSeg_CSV](https://huggingface.co/datasets/L-NLProc/LegalSeg_CSV), associated with the paper [“LegalSeg: Unlocking the Structure of Indian Legal Judgments Through Rhetorical Role Classification” (Findings of NAACL 2025)](https://aclanthology.org/2025.findings-naacl.63/). The paper describes a large Indian judgment rhetorical-role dataset; the dataset repository lists `train.csv`, `val.csv`, and `test.csv`.
+The candidate resource is [L-NLProc/LegalSeg_CSV](https://huggingface.co/datasets/L-NLProc/LegalSeg_CSV), associated with [“LegalSeg: Unlocking the Structure of Indian Legal Judgments Through Rhetorical Role Classification” (Findings of NAACL 2025)](https://aclanthology.org/2025.findings-naacl.63/). Access is currently unreliable. **No runtime feature or next development milestone depends on downloading LegalSeg.**
 
 The planned CSV columns are `Index`, `Text`, and `Label`. Until the dataset files and their annotation methodology are inspected directly, README references to rows use **annotated text units**; they should not be assumed to be sentence-level rows. The role set to be examined is:
 
@@ -52,9 +52,9 @@ The planned CSV columns are `Index`, `Text`, and `Label`. Until the dataset file
 - Decision
 - None
 
-**LegalSeg is not included in this checkout, and no LegalSeg model has been trained.** The dataset files are access-gated on Hugging Face; therefore, this repository does not currently have verifiable CSV row counts, split statistics, or label frequencies. Those statistics are intentionally not reported here. Verify the paper’s annotation methodology and calculate counts and distributions from the actual train, validation, and test CSVs after obtaining access.
+**LegalSeg is not included in this checkout, and no LegalSeg model has been trained.** This repository has no verifiable CSV row counts, split statistics, or label frequencies. Those statistics are intentionally not reported here. Do not fabricate Indian rhetorical-role annotations or claim an Indian-trained classifier.
 
-The planned LegalSeg sequence is:
+If an accessible, suitable dataset or manually validated annotation set becomes available, a future optional study should:
 
 1. Inspect and validate the official dataset files, schemas, labels, and annotation methodology.
 2. Establish a majority-class baseline.
@@ -63,22 +63,35 @@ The planned LegalSeg sequence is:
 5. Preserve the official train/validation/test split. Use validation—not test—for model selection or tuning; reserve test for final evaluation.
 6. Consider transformer fine-tuning only if baseline results justify it and compute is available.
 
-This work is **planned / in progress**, not completed.
+Until then, RMU:ECHR predictions remain optional, exploratory transfer signals. The explicit-text role cues in the runtime are transparent heuristics, not an Indian-trained classifier.
 
 ## Current system architecture
 
 The runtime implementation is in [`backend/app/`](backend/app/). The API currently performs the following:
 
 1. **Upload and validation:** FastAPI accepts a multipart PDF upload, streams it to a generated filename, enforces a default 25 MiB limit, and checks for a PDF signature.
-2. **Text extraction:** PyMuPDF extracts text page by page. Pages that appear scanned or image-heavy and contain little selectable text use a Tesseract OCR fallback. Extraction metadata records page-level method and basic quality indicators.
-3. **Sentence and passage construction:** Extracted text (including page markers) is segmented by spaCy’s English sentencizer and grouped into passages of five sentences. Passage metadata contains order and character offsets in the extracted text.
+2. **Text extraction:** PyMuPDF extracts text page by page. Pages that appear scanned or image-heavy and contain little selectable text use a Tesseract OCR fallback. Extraction metadata records page-level method, quality indicators, and character ranges for page text.
+3. **Sentence and passage construction:** Extracted text (including page markers) is segmented by spaCy’s English sentencizer and grouped into passages of five sentences. Passage metadata contains order and character offsets in the extracted text; page references are attached where extracted page ranges overlap.
 4. **Semantic representation:** `sentence-transformers/all-MiniLM-L6-v2` creates 384-dimensional embeddings. In the runtime, embeddings support similarity, relationship, and coherence signals; they do **not** drive summary passage selection.
-5. **Passage selection:** The summarizer groups passages into four-passage windows and, for longer documents, ranks windows using legal-marker matches and first/last-window bonuses. It selects a subset while avoiding adjacent windows, then restores source order. This can omit important content.
-6. **Hierarchical abstractive summarization:** A Hugging Face summarization pipeline (default model `facebook/bart-large-cnn`) summarizes each selected group, reduces intermediate summaries in bounded batches, and generates a final summary. This is a general summarization model, not a model fine-tuned or validated for Indian judgments.
-7. **Relationship and continuity analysis:** Metadata includes local passage similarity/distance signals and a comparison of adjacent similarity in original order versus deterministic shuffled orders. Optional RMU:ECHR classifier predictions are added only when a saved classifier artifact is available. These are exploratory signals, not validated legal relationships or Indian role labels.
-8. **Response and source references:** The API returns the summary and metadata, including selected passage IDs and character offsets, generation trace, extraction information, and preliminary grounding checks. Offsets refer to extracted text, not clickable PDF page citations.
+5. **Role-aware evidence organization:** A separate module assigns only unambiguous explicit textual cues to party arguments, court reasoning/decision, facts/procedure, issues, and precedents. Ambiguous passages remain unclassified. Optional RMU:ECHR labels receive an explicitly approximate functional mapping; they never assign a speaker or override uncertain text cues.
+6. **Passage selection:** The summarizer groups passages into four-passage windows and, for longer documents, ranks windows using legal-marker matches and first/last-window bonuses. It selects a subset while avoiding adjacent windows, restores source order, and reports selected and omitted passage IDs plus per-window scores/reasons. The policy can still omit important content.
+7. **Hierarchical abstractive summarization:** A Hugging Face summarization pipeline (default model `facebook/bart-large-cnn`) summarizes role-tagged selected groups, reduces intermediate summaries in bounded batches, and generates a final summary. The model input limit is read from model/tokenizer metadata when available; oversized input is split without enabling truncation. This is a general summarization model, not one fine-tuned or validated for Indian judgments.
+8. **Claim-level evidence checks:** Each generated claim in the generation trace and each returned claim receives source passage IDs, document ID, offsets, available pages, an explicit evidence role, a heuristic verification result, and an uncalibrated lexical-overlap score. Claims without role-compatible identified evidence are withheld from the returned summary and remain visible in verification metadata for review. Role problems, possible contradictions, insufficient evidence, and human-review abstentions are distinct outcomes. This is not NLI or entailment verification.
+9. **Structured view and research signals:** The response can include claim groups for facts, issues, party arguments, court reasoning, decisions, and precedents only when role-compatible evidence is identified. Existing passage relationship/coherence signals and the saved Gap 4 experiment are retained as exploratory measures, not proof of legal reasoning.
 
-The source-overlap check filters generated sentences using lexical token overlap and identifier-presence rules. It is not entailment verification, fact-checking, or proof that a summary statement is supported in context.
+The existing source-overlap check is still a lexical heuristic; it is not entailment, fact-checking, or proof of contextual support. Paragraph identifiers and bounding boxes are not currently reliable in the extraction layer and are marked unavailable rather than invented.
+
+```text
+Indian Judgment PDF
+  -> PDF/OCR extraction with page text ranges
+  -> ordered passages, offsets, and embeddings
+  -> explicit-cue role organization
+       + optional, separately labeled RMU:ECHR transfer
+  -> auditable selection (selected and omitted passage IDs)
+  -> token-bounded, hierarchical role-aware generation
+  -> per-claim lexical evidence/role/contradiction checks
+  -> traceable summary + evidence-backed structured sections
+```
 
 ## Implemented and planned capabilities
 
@@ -87,12 +100,15 @@ The source-overlap check filters generated sentences using lexical token overlap
 | Upload a PDF and extract digital text | Implemented |
 | OCR fallback for selected scanned/image-heavy pages | Implemented; requires the Tesseract executable and language data |
 | Build source-ordered sentence-grouped passages and embeddings | Implemented |
-| Select passage windows and generate hierarchical abstractive summaries | Implemented |
-| Return passage IDs, extracted-text offsets, and analysis metadata | Implemented; references are not page-level citations |
+| Assign transparent explicit-text role cues and keep ambiguous content uncertain | Implemented as heuristic; not validated Indian role classification |
+| Select passage windows and report selected/omitted passages | Implemented; selection remains heuristic and lossy |
+| Generate hierarchical abstractive summaries without silent tokenizer truncation | Implemented using available model limits; incomplete model metadata remains a caveat |
+| Verify generated claims individually and retain evidence references | Implemented as lexical/role heuristics, not entailment or legal accuracy |
+| Return passage IDs, extracted-text offsets, and available page references | Implemented; paragraph/bounding-box references unavailable |
 | Compute exploratory semantic relationship and continuity indicators | Implemented; not evidence of legal coherence |
 | Attach RMU:ECHR functional predictions when the optional model artifact exists | Implemented as cross-domain transfer only |
-| Use LegalSeg labels to classify Indian rhetorical roles | Planned; no LegalSeg training completed |
-| Structure output into facts, issues, each party’s arguments, reasoning, and decision | Intended product capability; not currently implemented as distinct validated sections |
+| Use LegalSeg labels to classify Indian rhetorical roles | Paused pending reliable access; no LegalSeg training completed |
+| Structure output into evidence-backed legal sections | Implemented as generated claim groups when role-compatible evidence is identified; not validated |
 | Provide a public-facing web interface | Planned; no frontend is present |
 | Validate summary faithfulness with expert-annotated Indian judgments | Needed; not yet completed at sufficient scale |
 
@@ -102,9 +118,15 @@ The source-overlap check filters generated sentences using lexical token overlap
 - RMU:ECHR classifier predictions transferred to Indian documents are not Indian ground truth.
 - Semantic similarity does not prove legal coherence, a relationship, or correctness.
 - Lexical overlap checks do not establish factual entailment and may miss unsupported or contradictory claims.
+- Role cues and contradiction terms are deliberately small heuristics; ambiguous passages and claims require human review.
+- Verification overlap scores are exploratory and uncalibrated. No thresholds have been calibrated on Indian legal annotations.
+- No NLI model is currently integrated. General NLI scores would be signals to validate, not proof of legal correctness; legal stance, speaker, and cross-passage context require domain-specific evaluation.
 - A general summarization model may omit, distort, or misattribute legal information.
 - Passage selection is selective and may omit facts, arguments, qualifications, or reasoning that matter.
-- OCR and sentence segmentation can introduce errors; source offsets refer to extracted text.
+- OCR and sentence segmentation can introduce errors; source offsets refer to extracted text, not PDF glyph coordinates.
+- Page references are available only when page-range metadata is present. Paragraph references and bounding boxes are explicitly unavailable.
+- `/upload` and `/summarize` delete temporary PDFs after processing. Extracted text is transient by default; `/upload` persists it only when `RETAIN_PROCESSED_TEXT=true`.
+- CPU-heavy extraction and inference run in FastAPI's worker thread pool; this avoids synchronous work on the event loop but does not add request cancellation or resource isolation.
 - The runtime and transfer experiment have not been validated through a sufficiently large, expert-annotated Indian legal evaluation.
 - A technically working API does not establish research effectiveness, legal reliability, or user benefit.
 - This prototype is not legal advice. The original judgment remains authoritative.
@@ -139,8 +161,8 @@ Summarization quality should be evaluated separately from the LegalSeg rhetorica
 ```text
 backend/app/
   main.py                       FastAPI routes and upload handling
-  services/                     Extraction, passages, embeddings, summarization,
-                                and optional transferred classifier
+  services/                     Extraction, passages, embeddings, role-aware
+                                evidence checks, summarization, and transfer classifier
   scripts/                      RMU:ECHR classifier artifact training
   experiment_ip/gap1..gap4/     Research experiment code and experiment notes
 configs/
@@ -152,6 +174,7 @@ data/experiments/
 reports/                        Experiment and implementation reports
 tests/
   test_runtime_pipeline.py      Runtime API and pipeline tests
+  test_evidence_verification.py Synthetic role and claim-verification cases
 requirements.txt                Python package requirements
 README.md                       Project onboarding and current status
 ```
@@ -182,6 +205,7 @@ From the repository root:
 
 ```bash
 python -m unittest discover -s tests -p "test_runtime_pipeline.py"
+python -m unittest discover -s tests -p "test_evidence_verification.py"
 ```
 
 ### Configuration
@@ -192,7 +216,8 @@ The API reads these environment variables:
 | --- | --- | --- |
 | `MAX_UPLOAD_BYTES` | Maximum upload size | `26214400` (25 MiB) |
 | `UPLOAD_DIR` | Uploaded PDFs | `<project-root>/uploads` |
-| `PROCESSED_DIR` | Extracted text saved by `/upload` | `data/processed` relative to the working directory |
+| `PROCESSED_DIR` | Destination for extracted text when persistence is enabled | `data/processed` relative to the working directory |
+| `RETAIN_PROCESSED_TEXT` | Persist `/upload` extracted text (`true`/`false`) | `false` |
 | `TESSERACT_CMD` | Tesseract executable path, if not on `PATH` | Unset |
 | `TESSERACT_LANG` | OCR language | `eng` |
 | `OCR_DPI` | Page rendering resolution for OCR | `300` |
@@ -200,7 +225,7 @@ The API reads these environment variables:
 | `RMU_CLASSIFIER_PATH` | Optional saved classifier artifact | `models/rmu_gap2_classifier.joblib` |
 | `RMU_CLASSIFIER_CONFIG` | Optional classifier label/model configuration | `configs/rmu_gap2_classifier.json` |
 
-The default uploads and model artifacts are ignored by Git. `/upload` retains its generated PDF and writes extracted text to `PROCESSED_DIR`. `/summarize` removes its temporary PDF after processing.
+Both endpoints delete their temporary PDF after processing. `/upload` returns `storage: "transient"` and no text-file path by default; set `RETAIN_PROCESSED_TEXT=true` to preserve extracted text under `PROCESSED_DIR`. `/summarize` does not persist extracted text. The `/upload` response still includes a short preview for the requesting client. Application logs do not include document text or generated summaries.
 
 ## API endpoints
 
@@ -209,7 +234,7 @@ All upload endpoints accept a multipart/form-data field named `file`.
 | Method and path | Behavior |
 | --- | --- |
 | `GET /` | Basic service status |
-| `POST /upload` | Extract PDF text, persist it under `PROCESSED_DIR`, and return extraction metadata and a preview |
+| `POST /upload` | Extract PDF text and return extraction metadata and a preview; extracted text is transient unless retention is explicitly enabled |
 | `POST /summarize` | Extract and summarize a PDF; return the summary and source/analysis metadata |
 
 Example:
@@ -219,7 +244,7 @@ curl -X POST "http://127.0.0.1:8000/summarize" \
   -F "file=@path/to/judgment.pdf"
 ```
 
-`/summarize` returns fields `summary` and `metadata`. Metadata can include extraction quality, passage counts and selected indices, extracted-text source offsets, generation trace, coverage measures, transferred functional predictions (if available), relationship/coherence signals, and lexical grounding-check results.
+`/summarize` returns fields `summary` and `metadata`. Metadata can include extraction quality, page-aware source offsets, selected and omitted passage IDs, generation trace with per-claim checks, evidence-backed structured sections, uncalibrated role/overlap outcomes, transferred functional predictions (if available), relationship/coherence signals, and lexical grounding-check results. Existing clients can continue reading `summary`; the metadata object has additive fields.
 
 ## Optional RMU:ECHR classifier
 
@@ -233,13 +258,13 @@ The script writes a model artifact under `models/` and classifier configuration 
 
 ## Roadmap
 
-1. Obtain and inspect LegalSeg; document its annotation unit, official split statistics, and label distribution from the actual CSV files and paper.
-2. Establish majority and TF-IDF + Logistic Regression baselines with strict train/validation/test separation.
-3. Decide whether transformer fine-tuning is justified by baseline results and available compute.
-4. Develop evaluation for summary faithfulness, coverage, party attribution, reasoning, outcome, readability, and source traceability with expert input.
-5. Compare against prompted general-purpose LLMs and suitable Indian legal summarization systems.
-6. Investigate structure-aware output for facts, issues, party arguments, court reasoning, and decision, with links to the relevant original text.
-7. Build a public-friendly platform only as evidence and evaluation support it.
+1. Prepare an expert-reviewed Indian judgment validation set and calibrate role/claim-verification thresholds; synthetic tests are not accuracy results.
+2. Compare (a) a general LLM prompted on the judgment, (b) the existing summarization pipeline, and (c) the role-aware evidence-grounded pipeline.
+3. Measure factual accuracy, party attribution, preservation of reasoning, outcome/direction accuracy, coverage, contradiction rate, traceability, and plain-language readability.
+4. Evaluate role heuristics, lexical grounding, any future NLI adapter, and end-to-end faithfulness as separate tasks. Use NLI only as an uncalibrated signal until validated with legal claims.
+5. Resume the optional LegalSeg baselines only when reliable dataset access and annotation documentation are available; retain the official split and report per-class metrics.
+6. Consider transformer fine-tuning only if baseline results justify it and compute is available.
+7. Build a public-facing interface only as evidence and evaluation support it.
 
 ## Further reading and onboarding
 
@@ -251,5 +276,7 @@ No `docs/PROJECT_CONTEXT.md`, `docs/RESEARCH_AND_EXPERIMENTS.md`, `docs/DATASETS
 - [Gap 4 experiment notes](backend/app/experiment_ip/gap4/README.md)
 - [Gap 4 saved results](data/experiments/gap4/GAP4_EXPERIMENT_1_REPORT.md)
 - [Runtime pipeline tests](tests/test_runtime_pipeline.py)
+- [Role-aware pipeline audit and evaluation plan](reports/ROLE_AWARE_PIPELINE.md)
+- [Synthetic claim-verification tests](tests/test_evidence_verification.py)
 - [LegalSeg paper](https://aclanthology.org/2025.findings-naacl.63/)
 - [LegalSeg dataset](https://huggingface.co/datasets/L-NLProc/LegalSeg_CSV)

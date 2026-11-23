@@ -35,6 +35,9 @@ class FakeGenerator:
     def __call__(self, source_text, **kwargs):
         if "SOURCE PASSAGES:\n" in source_text:
             source_text = source_text.split("SOURCE PASSAGES:\n", 1)[1]
+        source_text = re.sub(
+            r"^\[Passage [^\n]+\]\n", "", source_text, flags=re.MULTILINE
+        )
         if "references [" in source_text.lower() or "sources [" in source_text.lower():
             match = re.search(r"\]:\s*(.+)", source_text)
             summary = match.group(1).splitlines()[0] if match else source_text
@@ -137,6 +140,11 @@ class RuntimePipelineTests(unittest.TestCase):
         self.assertEqual(result["metadata"]["page_count"], 1)
         self.assertEqual(result["pages"][0]["extraction_method"], "digital")
         self.assertEqual(result["metadata"]["pages"][0]["extraction_method"], "digital")
+        page_metadata = result["metadata"]["pages"][0]
+        self.assertEqual(
+            result["text"][page_metadata["start_char"]:page_metadata["end_char"]],
+            result["pages"][0]["text"],
+        )
         self.assertTrue(result["metadata"]["quality"]["usable"])
         self.assertIn("--- Page 1 [digital] ---", result["text"])
 
@@ -179,6 +187,17 @@ class RuntimePipelineTests(unittest.TestCase):
         self.assertGreater(metadata["selected_passage_count"], 0)
         self.assertTrue(metadata["generation_trace"])
         self.assertTrue(all(item["source_references"] for item in metadata["generation_trace"]))
+        selection = metadata["passage_selection"]
+        selected_ids = set(selection["selected_passage_ids"])
+        omitted_ids = set(selection["omitted_passage_ids"])
+        self.assertEqual(selected_ids, set(metadata["selected_passage_indices"]))
+        self.assertFalse(selected_ids & omitted_ids)
+        self.assertEqual(selected_ids | omitted_ids, set(range(metadata["passage_count"])))
+        self.assertTrue(all(
+            claim["verification_method"] == "lexical_overlap_heuristic"
+            for trace in metadata["generation_trace"]
+            for claim in trace["claim_verification"]
+        ))
         self.assertEqual(metadata["relationship_analysis"]["local_pair_count"],
                          sum(min(5, metadata["passage_count"] - index - 1)
                              for index in range(metadata["passage_count"])))
@@ -212,8 +231,16 @@ class RuntimePipelineTests(unittest.TestCase):
         self.assertTrue(payload["summary"])
         self.assertIn("source_references", payload["metadata"])
         self.assertIn("grounding", payload["metadata"])
-        self.assertIn("FINAL SUMMARY", terminal_output.getvalue())
-        self.assertIn(payload["summary"], terminal_output.getvalue())
+        self.assertIn("claim_verification", payload["metadata"])
+        self.assertIn("returned_summary_claim_verification", payload["metadata"])
+        self.assertIn("passage_selection", payload["metadata"])
+        self.assertFalse(payload["metadata"]["generation_input"]["truncation_enabled"])
+        self.assertTrue(payload["metadata"]["generation_trace"][-1]["claim_verification"])
+        first_reference = payload["metadata"]["source_references"][0]
+        self.assertEqual(first_reference["page_numbers"], [1])
+        self.assertIsNone(first_reference["paragraph_reference"])
+        self.assertNotIn("FINAL SUMMARY", terminal_output.getvalue())
+        self.assertNotIn(payload["summary"], terminal_output.getvalue())
         self.assertEqual(swagger_response.status_code, 200)
         self.assertIn("/summarize", openapi_response.json()["paths"])
         schema = main.app.openapi()["paths"]["/summarize"]["post"]["responses"]["200"]
@@ -231,19 +258,22 @@ class RuntimePipelineTests(unittest.TestCase):
             upload_dir = Path(directory) / "uploads"
 
             with patch.object(main, "UPLOAD_DIR", upload_dir), \
-                    patch.object(main, "persist_text", return_value=Path(directory) / "text.txt"), \
+                    patch.object(main, "persist_text", return_value=Path(directory) / "text.txt") as persist, \
                     TestClient(main.app) as client:
                 first = client.post(
                     "/upload", files={"file": ("same-name.pdf", pdf_bytes, "application/pdf")}
                 )
-                second = client.post(
-                    "/upload", files={"file": ("same-name.pdf", pdf_bytes, "application/pdf")}
-                )
+                with patch.dict(os.environ, {"RETAIN_PROCESSED_TEXT": "true"}):
+                    second = client.post(
+                        "/upload", files={"file": ("same-name.pdf", pdf_bytes, "application/pdf")}
+                    )
                 self.assertEqual(first.status_code, 200, first.text)
                 self.assertEqual(second.status_code, 200, second.text)
-                stored_names = [path.name for path in upload_dir.glob("*.pdf")]
-                self.assertEqual(len(stored_names), 2)
-                self.assertEqual(len(set(stored_names)), 2)
+                self.assertEqual(first.json()["storage"], "transient")
+                self.assertIsNone(first.json()["text_file"])
+                self.assertEqual(second.json()["storage"], "retained")
+                persist.assert_called_once()
+                self.assertEqual(list(upload_dir.glob("*.pdf")), [])
 
             with patch.object(main, "UPLOAD_DIR", upload_dir), \
                     patch.object(main, "MAX_UPLOAD_BYTES", 8), \
@@ -253,7 +283,7 @@ class RuntimePipelineTests(unittest.TestCase):
                     files={"file": ("large.pdf", b"%PDF-1.7" + b"x" * 32, "application/pdf")},
                 )
             self.assertEqual(oversized.status_code, 413)
-            self.assertEqual(len(list(upload_dir.glob("*.pdf"))), 2)
+            self.assertEqual(len(list(upload_dir.glob("*.pdf"))), 0)
 
     def test_vijay_madanlal_long_judgment_route_and_metadata(self):
         passages_path = ROOT / "data/experiments/gap1/Vijay_Madanlal_Choudhary_vs_Union_Of_India_on_27_July_2022_passages.json"
@@ -281,8 +311,8 @@ class RuntimePipelineTests(unittest.TestCase):
         self.assertIn("content_coverage_fraction", payload["metadata"])
         self.assertIn("functional_coverage", payload["metadata"])
         self.assertIn("coherence_signal_status", payload["metadata"]["relationship_analysis"])
-        self.assertIn("FINAL SUMMARY", terminal_output.getvalue())
-        self.assertIn(payload["summary"], terminal_output.getvalue())
+        self.assertNotIn("FINAL SUMMARY", terminal_output.getvalue())
+        self.assertNotIn(payload["summary"], terminal_output.getvalue())
 
 
 if __name__ == "__main__":

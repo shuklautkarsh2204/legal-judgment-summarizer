@@ -8,6 +8,7 @@ from uuid import uuid4
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from pydantic import BaseModel
+from starlette.concurrency import run_in_threadpool
 
 from backend.app.services.text_extraction import extract_pdf, persist_text
 
@@ -30,7 +31,9 @@ app = FastAPI(
     title="Indian Legal Judgment Summarizer",
     description=(
         "Hierarchical, source-referenced judgment summaries. Experimental transfer "
-        "signals are identified separately and are not Indian ground truth."
+        "signals are identified separately and are not Indian ground truth. "
+        "Uploaded PDFs are temporary; extracted text is transient unless "
+        "RETAIN_PROCESSED_TEXT is enabled for /upload."
     ),
     version="1.0.0",
 )
@@ -75,7 +78,7 @@ async def _store_upload(file: UploadFile) -> tuple[Path, int, str]:
 
 
 def _extract(file_path, original_filename):
-    logger.info("Extracting PDF text from %s", original_filename)
+    logger.info("Extracting uploaded judgment PDF")
     extraction = extract_pdf(file_path)
     extraction["metadata"]["source_filename"] = original_filename
     quality = extraction["metadata"]["quality"]
@@ -90,6 +93,23 @@ def _extract(file_path, original_filename):
     return extraction
 
 
+def _process_summary(file_path, original_filename):
+    extraction = _extract(file_path, original_filename)
+    result = get_summarizer().summarize(
+        extraction["text"],
+        document_id=file_path.stem,
+        extraction_metadata=extraction["metadata"],
+    )
+    result["metadata"]["filename"] = original_filename
+    return extraction, result
+
+
+def _retain_processed_text():
+    return os.getenv("RETAIN_PROCESSED_TEXT", "false").strip().lower() in {
+        "1", "true", "yes", "on",
+    }
+
+
 @app.get("/")
 def root():
     return {"project": "Indian Legal Judgment Summarizer", "status": "running"}
@@ -100,25 +120,37 @@ async def upload_file(file: UploadFile = File(...)):
     file_path = None
     try:
         file_path, byte_count, original_filename = await _store_upload(file)
-        extraction = _extract(file_path, original_filename)
-        text_path = persist_text(extraction["text"], file_path)
+        extraction = await run_in_threadpool(_extract, file_path, original_filename)
+        text_path = (
+            await run_in_threadpool(persist_text, extraction["text"], file_path)
+            if _retain_processed_text() else None
+        )
         return {
             "filename": original_filename,
             "size_bytes": byte_count,
             "characters_extracted": len(extraction["text"]),
             "status": "uploaded and processed",
-            "text_file": str(text_path),
+            "storage": "retained" if text_path else "transient",
+            "text_file": str(text_path) if text_path else None,
             "text_preview": extraction["text"][:200],
             "metadata": extraction["metadata"],
         }
     except HTTPException:
         raise
     except (RuntimeError, ImportError) as error:
-        logger.exception("PDF extraction dependency or OCR failure")
-        raise HTTPException(status_code=503, detail=str(error)) from error
+        logger.error("PDF extraction unavailable (error_type=%s)", type(error).__name__)
+        raise HTTPException(
+            status_code=503,
+            detail="PDF extraction is unavailable because a required dependency failed.",
+        ) from error
     except Exception as error:
-        logger.exception("PDF upload processing failed")
-        raise HTTPException(status_code=422, detail=f"Unable to process PDF: {error}") from error
+        logger.error("PDF upload processing failed (error_type=%s)", type(error).__name__)
+        raise HTTPException(
+            status_code=422, detail="Unable to process the uploaded PDF."
+        ) from error
+    finally:
+        if file_path is not None:
+            file_path.unlink(missing_ok=True)
 
 
 @app.post(
@@ -130,31 +162,30 @@ async def summarize_file(file: UploadFile = File(...)) -> SummaryResponse:
     file_path = None
     try:
         file_path, byte_count, original_filename = await _store_upload(file)
-        extraction = _extract(file_path, original_filename)
-        logger.info("Starting hierarchical analysis for %s", original_filename)
-        result = get_summarizer().summarize(
-            extraction["text"],
-            document_id=Path(original_filename).stem,
-            extraction_metadata=extraction["metadata"],
+        _, result = await run_in_threadpool(
+            _process_summary, file_path, original_filename
         )
-        result["metadata"]["filename"] = original_filename
         result["metadata"]["upload_size_bytes"] = byte_count
-        print(f"FINAL SUMMARY [{original_filename}]\n{result['summary']}", flush=True)
-        logger.info("Final summary for %s:\n%s", original_filename, result["summary"])
         return result
     except HTTPException:
         raise
     except (RuntimeError, ImportError) as error:
-        logger.exception("Summarization model, dependency, or OCR failure")
-        raise HTTPException(status_code=503, detail=str(error)) from error
+        logger.error("Summarization unavailable (error_type=%s)", type(error).__name__)
+        raise HTTPException(
+            status_code=503,
+            detail="Summarization is unavailable because a required model or dependency failed.",
+        ) from error
     except ValueError as error:
-        logger.exception("Summarization input validation failed")
-        raise HTTPException(status_code=422, detail=str(error)) from error
+        logger.error("Summarization input rejected (error_type=%s)", type(error).__name__)
+        raise HTTPException(
+            status_code=422,
+            detail="Unable to process the extracted judgment input.",
+        ) from error
     except Exception as error:
-        logger.exception("Summarization failed")
+        logger.error("Summarization failed (error_type=%s)", type(error).__name__)
         raise HTTPException(
             status_code=500,
-            detail="Summarization failed. Check server logs for the underlying error.",
+            detail="Summarization failed. The judgment content was not written to logs.",
         ) from error
     finally:
         if file_path is not None:
