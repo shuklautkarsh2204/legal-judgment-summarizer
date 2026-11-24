@@ -84,30 +84,33 @@ def extract_pdf(pdf_path: Path, *, ocr_dpi=None, ocr_language=None) -> dict:
     language = ocr_language or os.getenv("TESSERACT_LANG", "eng")
     pages = []
 
-    with pmpdf.open(pdf_path) as document:
-        page_count = len(document)
-        for page_number, page in enumerate(document, start=1):
-            digital_text = page.get_text("text").strip()
-            extraction_method = "digital"
-            page_text = digital_text
+    try:
+        with pmpdf.open(pdf_path) as document:
+            page_count = len(document)
+            for page_number, page in enumerate(document, start=1):
+                digital_text = page.get_text("text").strip()
+                extraction_method = "digital"
+                page_text = digital_text
 
-            if _needs_ocr(page, digital_text):
-                try:
-                    page_text = _ocr_page(
-                        page, pytesseract, image_module, dpi=dpi, language=language
-                    )
-                except Exception as error:
-                    raise RuntimeError(
-                        f"OCR failed on PDF page {page_number}: {error}"
-                    ) from error
-                extraction_method = "ocr"
+                if _needs_ocr(page, digital_text):
+                    try:
+                        page_text = _ocr_page(
+                            page, pytesseract, image_module, dpi=dpi, language=language
+                        )
+                    except Exception as error:
+                        raise RuntimeError(
+                            f"OCR failed on PDF page {page_number}: {error}"
+                        ) from error
+                    extraction_method = "ocr"
 
-            pages.append({
-                "page_number": page_number,
-                "extraction_method": extraction_method,
-                "character_count": len(page_text),
-                "text": page_text,
-            })
+                pages.append({
+                    "page_number": page_number,
+                    "extraction_method": extraction_method,
+                    "character_count": len(page_text),
+                    "text": page_text,
+                })
+    except pmpdf.FileDataError as error:
+        raise ValueError("Uploaded file is not a readable PDF.") from error
 
     text_parts = []
     character_offset = 0

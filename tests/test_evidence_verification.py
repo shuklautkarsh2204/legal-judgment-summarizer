@@ -30,6 +30,29 @@ def source(passage_id, text, *, page_numbers=None):
 class EvidenceVerificationTests(unittest.TestCase):
     """Controlled synthetic examples; these are not legal-accuracy evaluations."""
 
+    def test_generation_passes_source_without_instruction_prefix(self):
+        class RecordingGenerator:
+            def __init__(self):
+                self.input = None
+
+            def __call__(self, text, **kwargs):
+                self.input = text
+                return [{"summary_text": "The Court dismissed the appeal."}]
+
+        generator = RecordingGenerator()
+        summarizer = object.__new__(HierarchicalSummarizer)
+        summarizer._generator = generator
+        summarizer._generation_stats = {
+            "input_token_limit": None,
+            "generation_chunk_count": 0,
+            "truncation_enabled": False,
+        }
+        source_text = "The Court dismissed the appeal."
+
+        summarizer._generate(source_text)
+
+        self.assertEqual(generator.input, source_text)
+
     def test_party_submission_cannot_support_a_court_finding(self):
         evidence = source(
             1, "The petitioner argued that the investigation was unlawful."

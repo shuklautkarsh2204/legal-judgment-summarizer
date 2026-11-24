@@ -206,6 +206,17 @@ class RuntimePipelineTests(unittest.TestCase):
         self.assertEqual(metadata["coherence_analysis"]["permutation_count"], 5)
         self.assertIn("not validated on Indian", metadata["coherence_analysis"]["status"])
 
+    def test_unclassified_judgment_text_returns_clearly_labeled_draft(self):
+        text = (
+            "The applicant's request followed a procedural hearing, and the notice "
+            "described a statutory review."
+        )
+        result = make_test_summarizer().summarize(text, document_id="unseen-test")
+
+        self.assertEqual(result["summary"], text)
+        self.assertEqual(result["metadata"]["summary_status"], "unverified_draft")
+        self.assertTrue(result["metadata"]["role_attribution_filter"]["withheld_claims"])
+
     def test_small_indian_judgment_through_summarize_endpoint(self):
         source_path = ROOT / "data/experiments/gap1/Vijay_Madanlal_Choudhary_vs_Union_Of_India_on_27_July_2022_passages.json"
         source_passages = json.loads(source_path.read_text(encoding="utf-8"))
@@ -284,6 +295,24 @@ class RuntimePipelineTests(unittest.TestCase):
                 )
             self.assertEqual(oversized.status_code, 413)
             self.assertEqual(len(list(upload_dir.glob("*.pdf"))), 0)
+
+    def test_malformed_pdf_is_reported_as_client_error(self):
+        with tempfile.TemporaryDirectory() as directory:
+            upload_dir = Path(directory) / "uploads"
+            with patch.object(main, "UPLOAD_DIR", upload_dir), TestClient(main.app) as client:
+                for endpoint in ("/upload", "/summarize"):
+                    response = client.post(
+                        endpoint,
+                        files={
+                            "file": (
+                                "broken.pdf",
+                                b"%PDF-1.7 this is not a PDF",
+                                "application/pdf",
+                            )
+                        },
+                    )
+                    self.assertEqual(response.status_code, 422, response.text)
+            self.assertEqual(list(upload_dir.glob("*.pdf")), [])
 
     def test_vijay_madanlal_long_judgment_route_and_metadata(self):
         passages_path = ROOT / "data/experiments/gap1/Vijay_Madanlal_Choudhary_vs_Union_Of_India_on_27_July_2022_passages.json"

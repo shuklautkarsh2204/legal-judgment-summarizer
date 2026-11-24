@@ -109,7 +109,7 @@ Indian Judgment PDF
 | Attach RMU:ECHR functional predictions when the optional model artifact exists | Implemented as cross-domain transfer only |
 | Use LegalSeg labels to classify Indian rhetorical roles | Paused pending reliable access; no LegalSeg training completed |
 | Structure output into evidence-backed legal sections | Implemented as generated claim groups when role-compatible evidence is identified; not validated |
-| Provide a public-facing web interface | Planned; no frontend is present |
+| Provide a developer Streamlit interface for PDF upload, summaries, verification, and provenance | Implemented in `frontend/`; requires the existing FastAPI backend |
 | Validate summary faithfulness with expert-annotated Indian judgments | Needed; not yet completed at sufficient scale |
 
 ## Limitations and research integrity
@@ -245,6 +245,19 @@ curl -X POST "http://127.0.0.1:8000/summarize" \
 ```
 
 `/summarize` returns fields `summary` and `metadata`. Metadata can include extraction quality, page-aware source offsets, selected and omitted passage IDs, generation trace with per-claim checks, evidence-backed structured sections, uncalibrated role/overlap outcomes, transferred functional predictions (if available), relationship/coherence signals, and lexical grounding-check results. Existing clients can continue reading `summary`; the metadata object has additive fields.
+
+## Streamlit developer frontend
+
+Install the frontend dependencies and start the app from the repository root:
+
+```bash
+python -m pip install -r frontend/requirements.txt
+python -m streamlit run frontend/app.py
+```
+
+The frontend sends uploaded PDFs to `POST /summarize` as multipart form data in the `file` field and waits for the synchronous response. Set `BACKEND_URL` to use a backend other than `http://localhost:8000`. The request read timeout defaults to 1800 seconds and can be changed with `BACKEND_TIMEOUT_SECONDS`.
+
+The interface displays the summary, only the structured sections returned by the backend, claim-level verification, and available source passage/page/offset references. The backend does not currently return source passage text or PDF page images as part of those references. Verification scores are backend-provided heuristic signals, not proof of legal correctness.
 
 ## Optional RMU:ECHR classifier
 

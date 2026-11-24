@@ -32,15 +32,6 @@ _LEGAL_MARKERS = (
     "submission", "contended", "prosecution", "evidence", "reasoning",
 )
 logger = logging.getLogger("legal_judgment_summarizer.summarization")
-_GENERATION_INSTRUCTION = (
-    "Summarize only statements supported by the source. Do not add facts, arguments, "
-    "citations, statutory provisions, dates, or holdings. Preserve party positions "
-    "and legal outcomes only when explicitly stated. Keep party submissions attributed "
-    "to that party; a party submission alone cannot establish what the Court held or "
-    "ordered. Treat uncertain role tags as uncertain, and do not infer missing roles."
-    " Use clear plain language for a non-lawyer without changing legal meaning."
-    "\nSOURCE PASSAGES:\n"
-)
 _COHERENCE_RANDOM_SEED = 42
 _COHERENCE_PERMUTATIONS = 5
 
@@ -156,7 +147,7 @@ def _count_tokens(tokenizer, text):
 
 
 def _split_long_fragment(fragment, tokenizer, input_limit):
-    if _count_tokens(tokenizer, _GENERATION_INSTRUCTION + fragment) <= input_limit:
+    if _count_tokens(tokenizer, fragment) <= input_limit:
         return [fragment]
 
     sentences = _sentences(fragment)
@@ -173,9 +164,7 @@ def _split_long_fragment(fragment, tokenizer, input_limit):
         current = ""
         for word in words:
             candidate = current + word
-            if current and _count_tokens(
-                tokenizer, _GENERATION_INSTRUCTION + candidate
-            ) > input_limit:
+            if current and _count_tokens(tokenizer, candidate) > input_limit:
                 pieces.append(current)
                 current = word
             else:
@@ -183,7 +172,7 @@ def _split_long_fragment(fragment, tokenizer, input_limit):
         if current:
             pieces.append(current)
         if all(
-            _count_tokens(tokenizer, _GENERATION_INSTRUCTION + piece) <= input_limit
+            _count_tokens(tokenizer, piece) <= input_limit
             for piece in pieces
         ):
             return pieces
@@ -195,7 +184,7 @@ def _split_long_fragment(fragment, tokenizer, input_limit):
 
 
 def _split_source_to_fit(source_text, tokenizer, input_limit):
-    if _count_tokens(tokenizer, _GENERATION_INSTRUCTION + source_text) <= input_limit:
+    if _count_tokens(tokenizer, source_text) <= input_limit:
         return [source_text]
 
     fragments = [
@@ -211,9 +200,7 @@ def _split_source_to_fit(source_text, tokenizer, input_limit):
         fragment_pieces = _split_long_fragment(fragment, tokenizer, input_limit)
         for piece in fragment_pieces:
             candidate = f"{current}\n{piece}" if current else piece
-            if current and _count_tokens(
-                tokenizer, _GENERATION_INSTRUCTION + candidate
-            ) > input_limit:
+            if current and _count_tokens(tokenizer, candidate) > input_limit:
                 chunks.append(current)
                 current = piece
             else:
@@ -302,7 +289,7 @@ class HierarchicalSummarizer:
         summaries = []
         for chunk in chunks:
             result = self.generator(
-                _GENERATION_INSTRUCTION + chunk,
+                chunk,
                 max_length=220,
                 min_length=20,
                 do_sample=False,
@@ -449,6 +436,17 @@ class HierarchicalSummarizer:
         final_summary, role_withheld_claims = retain_role_verified_claims(
             lexically_grounded_summary, lexical_claim_verification
         )
+        summary_status = "passed_heuristic_checks"
+        if not final_summary:
+            if lexically_grounded_summary:
+                final_summary = lexically_grounded_summary
+                summary_status = "unverified_draft"
+            else:
+                final_summary = (
+                    "No generated claims passed the exploratory source and role checks. "
+                    "Review the original judgment."
+                )
+                summary_status = "no_usable_summary"
         final_references = [
             reference for item in current_level
             for reference in item["source_references"]
@@ -461,16 +459,11 @@ class HierarchicalSummarizer:
             "source_references": final_references,
             "claim_verification": claim_verification,
         })
+        generation_trace[-1]["returned_summary"] = final_summary
         returned_summary_verification = verify_summary_claims(
             final_summary, selected_passages
         )
         structured_summary = build_structured_summary(returned_summary_verification)
-
-        if not final_summary:
-            final_summary = (
-                "No generated claims passed the exploratory source and role checks. "
-                "Review the original judgment."
-            )
         logger.info(
             "Completed %s with %d selected passages and %d flagged claims",
             document_id, len(selected_passages), len(unsupported_claims),
@@ -566,6 +559,7 @@ class HierarchicalSummarizer:
             "summary": final_summary,
             "metadata": {
                 "document_id": document_id,
+                "summary_status": summary_status,
                 "passage_count": len(passages),
                 "selected_passage_count": len(selected_passages),
                 "selected_passage_indices": sorted(selected_ids),

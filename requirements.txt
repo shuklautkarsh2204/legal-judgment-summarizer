@@ -15,8 +15,8 @@ torchaudio>=2.8.0
 # ==============================
 # Hugging Face Ecosystem
 # ==============================
-transformers>=4.55.0
-datasets>=4.0.0
+transformers>=4.55.0,<5.0.0
+datasets>=4.0.0,<5.0.0
 accelerate>=1.10.0
 tokenizers>=0.21.0
 sentencepiece>=0.2.0
@@ -25,7 +25,7 @@ evaluate>=0.4.5
 # ==============================
 # Sentence Embeddings
 # ==============================
-sentence-transformers>=5.1.0
+sentence-transformers>=5.1.0,<6.0.0
 
 # ==============================
 # NLP Libraries
